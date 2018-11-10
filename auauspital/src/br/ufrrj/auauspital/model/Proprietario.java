@@ -4,19 +4,17 @@ import java.util.ArrayList;
 
 public class Proprietario extends Pessoa {
 
-	private int idProprietario;
 	private Endereco endereco;
 	private ArrayList<Animal> animais;
 	
-	public Proprietario(String nome, String cpf) {
-		super(nome, cpf);
+	public Proprietario(int idProprietario, String nome, String cpf, int tipo) {
+		super(idProprietario, nome, cpf, tipo);
 	}
 	
-	public Proprietario(int idProprietario, String nome, String cpf, Endereco endereco, ArrayList<Animal> animais) {
-		super(nome, cpf);
+	public Proprietario(int idProprietario, String nome, String cpf, Endereco endereco, ArrayList<Animal> animais, int tipo) {
+		super(idProprietario, nome, cpf, tipo);
 		this.endereco = endereco;
 		this.animais = animais;
-		this.idProprietario = idProprietario;
 	}
 	
 	public void addAnimal(Animal animal) {

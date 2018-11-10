@@ -1,14 +1,16 @@
 package br.ufrrj.auauspital.model;
 
 public class Animal {
+	private int idAnimal;
 	private String tipo;
 	private String cor;
 	private String nome;
 	private int idade;
 	private Proprietario proprietario;
 
-	public Animal(String tipo, String cor, String nome, int idade, Proprietario proprietario) {
+	public Animal(int idAnimal, String tipo, String cor, String nome, int idade, Proprietario proprietario) {
 		super();
+		this.idAnimal = idAnimal;
 		this.tipo = tipo;
 		this.cor = cor;
 		this.nome = nome;

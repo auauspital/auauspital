@@ -1,6 +1,7 @@
 package br.ufrrj.auauspital.model;
 
 public class Endereco {
+	private int idEndereco;
 	private String logradouro;
 	private String cep;
 	private String uf;

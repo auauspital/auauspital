@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Prontuario {
+	private int idProntuario;
 	private Animal animal;
 	private Date dataRetorno;
 	private Date dataAtendimento;
@@ -12,9 +13,10 @@ public class Prontuario {
 	private Usuario professorResponsavel;
 	private Usuario aluno;
 
-	public Prontuario(Animal animal, Date dataRetorno, Date dataAtendimento, ArrayList<String> motivos,
+	public Prontuario(int idProntuario, Animal animal, Date dataRetorno, Date dataAtendimento, ArrayList<String> motivos,
 			ArrayList<String> prescricoes, Usuario professorResponsavel, Usuario aluno) {
 		super();
+		this.idProntuario = idProntuario;
 		this.animal = animal;
 		this.dataRetorno = dataRetorno;
 		this.dataAtendimento = dataAtendimento;
