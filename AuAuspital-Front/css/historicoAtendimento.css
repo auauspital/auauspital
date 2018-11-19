@@ -1,0 +1,102 @@
+/*Esse CSS esta sendo usado em
+1. atendAluno.html
+2. atendProfessor.html
+3. importado em prontuario.css*/
+
+h2{/*Colocar titulo da pagina mais perto do canto a esquerda*/
+  margin-left: -50px;
+  margin-top: 30px;
+}
+.peixeRow{ /*Classe apenas para colocar a imagem do peixe acima do rodapé, em vez de "dentro"*/
+  margin-bottom: 23px;
+}
+
+.afastarRow{ /*Classe apenas para afastar uma row da row de cima quando for necessario*/
+  margin-top: 30px;
+}
+
+.table-overflow { /*colocar scrollbar na tabela*/
+    max-height:220px;
+    overflow-y:auto;
+}
+
+
+.imagemCardio {
+  max-width: 70%;
+  position: relative;
+}
+
+.square2 {
+    float:right;
+    position: relative;
+    width: 30vmin;
+    padding-top: 100vh;
+    padding-bottom : 0%;
+    margin:1.66%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+
+/*media querie para deixar as imagens das páginas de atendimentos por professores e atendimentos por alunos responsivas*/
+
+@media (min-width: 768px) {
+  .imagemPeixinho{
+    float:right;
+    margin-top:30px;
+    margin-bottom:0;
+  }
+  .square2 {
+    padding-top: 50vh;
+    bottom: -43px;
+    padding-left: 30px;
+  }
+}
+@media (min-width: 992px) {
+  .imagemPeixinho{
+    float:right;
+    margin-top:200px;
+    margin-bottom:0;
+  }
+  .square2 {
+    padding-top: 57vh;
+    bottom: -45px;
+    padding-left: 60px;
+  }
+}
+@media (min-width: 1200px) {
+
+.imagemPeixinho{
+  float:right;
+  margin-top:198px;
+  margin-bottom:0;
+}
+
+.square2 {
+  padding-top: 53vh;
+  bottom: -47px;
+  padding-left: 60px;
+}
+}
+
+@media (min-width: 1800px) {
+
+.imagemPeixinho{
+  float:right;
+  margin-top:368px;
+  margin-bottom:0;
+}
+
+.square2 {
+  padding-top: 57vh;
+  bottom: -55px;
+  padding-left: 60px;
+}
+}
+
+
+
+::-webkit-scrollbar-track-piece  {  background-color: #D3D3D3; } /* cor do botão de rolagem */
+::-webkit-scrollbar-thumb        {  background-color: #696969; } /* cor do fundo da scrollbar*/
+::-webkit-scrollbar              {  width: 15px;} /* definindo largura da scrolbar, para tirar setas "cima e baixo"*/

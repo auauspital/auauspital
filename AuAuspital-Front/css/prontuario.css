@@ -1,0 +1,27 @@
+@import "historicoAtendimento.css";
+
+/*Usado nas paginar
+1. prontAnimal.html
+2. animalRetorno.html*/
+
+
+.bordaTop{/* afastar imagem do cabeçalho*/
+  margin-top: 0px;
+  max-width: 50%;
+  float: right;
+  position: relative;
+}
+.bordaTop2{/* afastar imagem do cabeçalho*/
+  margin-top: 50px;
+  max-width: 50%;
+  float: left;
+}
+
+.someSpace{ /* dar espaço do subtitulo em relação ao titulo*/
+  margin-left: 150px;
+}
+
+.scrollBar{ /*colocar scrollbar onde mostra o prontuario*/
+  max-height:100px;
+  overflow-y:auto;
+}

@@ -1,0 +1,622 @@
+html {
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+
+body {
+  height: 100%;
+}
+
+h4 {
+  font: 26px avenir;
+  color: #707070;
+}
+
+h5 {
+  font: auto avenir;
+  color: #FFF7EA;
+  font-weight: 800;
+}
+
+p {
+  font: 12px avenirLight;
+  color: #707070;
+}
+
+a {
+  font: 18px avenir;
+  color: #707070 !important;
+}
+
+select {
+  font: 10px avenirLight !important;
+  color: #707070 !important;
+}
+
+select option {
+  font: 10px avenir !important;
+  color: #707070 !important;
+}
+
+label {
+  font: 13px avenirLight !important;
+  color: #707070 !important;
+}
+
+/*fontes do site*/
+@font-face {
+  font-family: "avenir";
+  src: url("fonts/AvenirLTStd-Black.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "avenirLight";
+  src: url("fonts/AvenirLTStd-Book.otf") format("opentype");
+}
+
+/*Sections responsivas da tela de login */
+.intro {
+  height: 100%
+}
+
+.painel-esquerdo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF7EA;
+  height: 100%;
+  color: #FFF;
+}
+
+.painel-direito {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFF;
+  height: 100%;
+  color: #3d231b;
+}
+
+/* ajustes da logo na tela de login */
+.wrapper {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding-top: 30px;
+}
+
+/* modifica o tamanho da logo na tela de login */
+.wrapper img {
+  width: 350px;
+}
+}
+
+/* responsividade da tela de login*/
+@media (max-width: 1200px) {
+
+  /*Responsividade dos paineis da página de login*/
+  .painel-esquerdo {
+    height: 50%
+  }
+
+  .painel-direito {
+    height: 50%
+  }
+}
+
+/* formulário de login */
+.main {
+  margin: 11em auto 0;
+  width: 44%;
+}
+
+.lable input[type="text"] {
+  padding: 14px;
+  font-size: 1em;
+  font-family: avenirLight;
+  font-weight: lighter;
+  font-variant: small-caps;
+  margin: 10px 0px;
+  color: #666666;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  margin-left: 3px;
+  background: #FFFFFF;
+  box-shadow: 1px 2px 30px rgba(211, 211, 211, .5);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  border-left: 6px solid #fff;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+
+.lable input[type="text"]:hover, .lable-2 input[type="text"]:hover, input[type="Password"]:hover, #active {
+  color: #DCDCDC;
+  border-left: 6px solid#FF9F02;
+}
+
+.lable-2 input[type="text"], input[type="Password"] {
+  padding: 14px;
+  width: 100%;
+  font-size: 1em;
+  margin: 10px 0px;
+  border: none;
+  color: #666666;
+  cursor: pointer;
+  background: none;
+  float: left;
+  outline: none;
+  font-weight: 700;
+  font-family: 'Oxygen', sans-serif;
+  background: #ffffff;
+  box-shadow: 1px 2px 30px rgba(211, 211, 211, .5);
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  border-left: 6px solid #fff;
+  border-bottom: none;
+  border-right: none;
+  border-top: none;
+}
+
+/* Frase tela de login */
+.texto-login {
+  position: absolute;
+  top: 33%;
+  left: 18%;
+}
+
+/* icone estetoscopio na tela de login */
+.icon-login {
+  position: absolute;
+  margin-top: -207px;
+}
+
+.icon-login img {
+  width: 120px;
+}
+
+.login-link, .login-link:visited, .login-link:hover, .login-link:active {
+  text-decoration: none;
+  background-color: white !important;
+}
+
+/*Modificações navbar*/
+.navbar {
+  color: #FFFFFF;
+  background-color: #FFF7EA !important;
+  border-radius: 0;
+  border: none;
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+
+.navbar img {
+  max-width: 200px;
+}
+
+/*ajustando os icones do menu*/
+.glyphicon {
+  padding-top: 14px;
+  font-size: 18px;
+  margin-left: 2px;
+  margin-right: 10px;
+  color: #707070 !important;
+}
+
+ul>li>a:hover {
+  color: #FFAB00 !important;
+}
+
+ul>li>a:hover>.glyphicon {
+  padding-top: 14px;
+  font-size: 18px;
+  color: #57B5B4 !important;
+}
+
+/*Botões da Home. São quadrados responsivos */
+.grid {
+  margin: 0 auto;
+  max-width: 110vh;
+  max-height: 110vh;
+  font-size: 1rem;
+  padding-bottom: 20px;
+}
+
+.row {
+  display: flex;
+}
+
+.box {
+  border: solid 2px;
+  border-color: #707070;
+  border-radius: 2px !important;
+  margin-bottom: 5px;
+  margin-right: 30px;
+  margin-left: 30px;
+  margin-top: 20px;
+  color: white;
+  font-weight: bold;
+  flex: 1 0 auto;
+  position: relative;
+}
+
+.box:after {
+  content: "";
+  float: left;
+  display: block;
+  padding-top: 100%;
+}
+
+.box .inner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Título da página de Iniciar Atendimento e botão retangular para cadastrar novo animal */
+#titulos {
+  padding-left: 2%;
+}
+
+.rectangle-box {
+  position: relative;
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+  background: #57B5B4;
+  border: solid 2px;
+  border-color: #707070;
+  border-radius: 2px !important;
+}
+
+.rectangle-box:before {
+  content: "";
+  display: block;
+  padding-top: 18%;
+}
+
+.rectangle-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  color: white;
+}
+
+.rectangle-content div {
+  display: table;
+  width: 100%;
+  height: 100%;
+  padding-top: 1%;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+/* Ajustando as colunas da página Iniciar Atendimento.
+Algumas páginas deixei com a disposição column2 + column + column2, e outras com column4 + column3 + column4.
+Na página do prontuário precisei alterar os valores, fiz direto no código.
+Na página de atendimento fiz dois conjuntos de colunas, uma no topo da outra:
+ column2 + column + column2
+ column4 + column3 + column4
+
+ NÃO MODIFIQUEM ISSO, beijinhos <3
+   */
+   
+.column {
+  float: left;
+  width: 60%;
+}
+
+.column2 {
+  float: left;
+  width: 40%;
+  padding: 0px !important;
+}
+
+.column3 {
+  float: left;
+  width: 70%;
+  margin-top: 20px;
+}
+
+.column4 {
+  float: left;
+  width: 30%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*Ajustando o form da página de Iniciar Atendimento*/
+#busca {
+  margin-top: 30px !important;
+  border-radius: 2px !important;
+  font: 15px avenirLight;
+  width: 80%;
+  height: 28px;
+  margin-left: 10%;
+}
+
+#resultado {
+  margin-top: 30px !important;
+  border-radius: 2px !important;
+  width: 80%;
+  height: 45px;
+  margin-left: 10%;
+  border-color: #FFAB00;
+}
+
+.radio-inline {
+  color: #707070 !important;
+  margin-left: 10%;
+  font-size: 12px;
+}
+
+#radioButtons {
+  margin-top: 10px;
+}
+
+.btn-form {
+  background-color: #FFAB00;
+  color: #FFF;
+  font: 15px avenir;
+  border-radius: 2px !important;
+  border: solid 2px;
+  border-color: #707070;
+  float: right;
+  margin-top: 30px;
+  margin-right: 10%;
+}
+
+.btn-form:hover {
+  color: #FFF;
+}
+
+/*Algumas configurações no form do prontuário */
+#motivoConsulta {
+  margin-top: 30px !important;
+  border-radius: 2px !important;
+  width: 80%;
+  height: 100px;
+  margin-left: 10%;
+}
+
+#label {
+  font: 13px avenir !important;
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}
+
+#prontuario {
+  font: 14px avenir !important;
+}
+
+#imagemButton {
+  max-height: 200px;
+  max-width: 80px;
+  float: right;
+}
+
+#imagemButton img {
+  max-width: 80px !important;
+}
+
+/* Ajustes na lista da página de aprovações pendentes */
+#table-overflow {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.list-group a {
+  font: 13px avenirLight !important;
+  color: #707070 !important;
+  border-radius: 2px !important;
+}
+
+#exibição {
+  height: 300px;
+  border: solid 1px;
+  border-color: #d3d3d3;
+  border-radius: 2px !important;
+  z-index: 1;
+  overflow-y: scroll;
+}
+
+.square {
+  float: right;
+  position: relative;
+  width: 30vmin;
+  padding-top: 100vh;
+  padding-bottom: 0%;
+  margin: 1.66%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.imagemDog {
+  max-width: 70%;
+  position: relative;
+}
+
+/*Para ajustar a lista da pagina de prontuário animal*/
+.list-group-item {
+  height: 50px;
+  padding: 7px 15px;
+  overflow: hidden;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+}
+
+/****************TODAS AS MEDIAS QUERIES USADAS NO SITE **********************/
+@media (min-width: 768px) {
+
+  /* Aqui são as querie necessárias pra responsividade da imagem e do texto na tela de login, testei em telas de 10, 12, 13, 15 e no meu de 21*/
+  .icon-login {
+    position: absolute;
+    margin-top: -197px;
+  }
+
+  .texto-login {
+    position: absolute;
+    top: 33%;
+    left: 23%;
+  }
+
+  /*Para ajustar a responsividade da imagem do cachorrinho na página de aprovações*/
+  .square {
+    padding-top: 60vh;
+    bottom: -40px;
+  }
+
+  /*Para ajustar a responsividade da imagem da cruz na página de prontuários por animal*/
+  .bordaTop {
+    padding-top: 30px;
+  }
+}
+
+@media (min-width: 992px) {
+
+  /* Aqui são as querie necessárias pra responsividade da imagem e do texto na tela de login, testei em telas de 10, 12, 13, 15 e no meu de 21*/
+  .icon-login {
+    position: absolute;
+    margin-top: -197px;
+  }
+
+  .texto-login {
+    position: absolute;
+    top: 33%;
+    left: 30%;
+  }
+
+  /*Para ajustar a responsividade da imagem do cachorrinho na página de aprovações*/
+  .square {
+    padding-top: 60vh;
+    bottom: -75px;
+  }
+
+  /*Para ajustar a responsividade da imagem da cruz na página de prontuários por animal*/
+  .bordaTop {
+    padding-top: 60px;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  /* Aqui são as querie necessárias pra responsividade da imagem e do texto na tela de login, testei em telas de 10, 12, 13, 15 e no meu de 21*/
+  .icon-login {
+    position: absolute;
+    margin-top: -237px;
+  }
+
+  .texto-login {
+    position: absolute;
+    top: 33%;
+    left: 18%;
+  }
+
+  /*Para ajustar a responsividade da imagem do cachorrinho na página de aprovações*/
+  .square {
+    padding-top: 60vh;
+    bottom: -72px;
+  }
+
+  /*Para ajustar a responsividade da imagem da cruz na página de prontuários por animal*/
+  .bordaTop {
+    padding-top: 30px;
+  }
+}
+
+@media (min-width: 1800px) {
+
+  /* Aqui são as querie necessárias pra responsividade da imagem e do texto na tela de login, testei em telas de 10, 12, 13, 15 e no meu de 21*/
+  .icon-login {
+    position: absolute;
+    margin-top: -337px;
+  }
+
+  .texto-login {
+    position: absolute;
+    top: 33%;
+    left: 28%;
+  }
+
+  .icon-login img {
+    width: 170px;
+  }
+
+  /*Para ajustar a responsividade da imagem do cachorrinho na página de aprovações*/
+  .square {
+    padding-top: 60vh;
+    bottom: -72px;
+  }
+
+  /*Para ajustar a responsividade da imagem da cruz na página de prontuários por animal*/
+  .bordaTop {
+    padding-top: 30px;
+  }
+}
+
+/****************************************************************************/
+/* footer */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #57B5B4;
+  border: none;
+  text-align: center;
+  z-index: 9;
+}
+
+.push {
+  height: 70px;
+}
+
+/*Alterações da scroll-bar*/
+::-webkit-scrollbar-track-piece {
+  background-color: #D3D3D3;
+}
+
+/* cor do botão de rolagem */
+::-webkit-scrollbar-thumb {
+  background-color: #696969;
+}
+
+/* cor do fundo da scrollbar*/
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* definindo largura da scrolbar, para tirar setas "cima e baixo"*/
+
+
+/* ------ VALIDAÇÃO FORMULÁRIO ------ */
+
+.msg-erro{
+  color: red;
+}

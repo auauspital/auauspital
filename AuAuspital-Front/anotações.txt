@@ -1,0 +1,9 @@
+Ajustar a responsividade do texto dentro da lista 
+
+Responsividade das imagens
+
+Responsividade da listinha na página de iniciar atendimento
+
+validação dos formulários
+
+resolver a merda das imagens que ódio do caralho dessa merda de responsividade
