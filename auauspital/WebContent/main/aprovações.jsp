@@ -1,9 +1,7 @@
-<?php
-require "header.php";
-require "footer.php";
- ?>
-
-  <!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
   <html lang="pt-br">
 
   <head>
@@ -15,21 +13,32 @@ require "footer.php";
     <!--===============================================================================================-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="../css/estilo.css">
+    <link rel="stylesheet" type="text/css" href="/auauspital/src/css/estilo.css">
     <!--===============================================================================================-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--===============================================================================================-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    <script src="../js/formValidação.js"></script>
+    <script src="/auauspital/src/js/formValidação.js"></script>
     <!--===============================================================================================-->
-    <script src="../js/verificação.js"></script>
+    <script src="/auauspital/src/js/verificação.js"></script>
     <!--===============================================================================================-->
   </head>
 
 
   <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <img src="/auauspital/src/imagens/logo2.png">
+      </div>
 
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="home.php">Home<span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="login.php">Sair<span class="glyphicon glyphicon-log-out"></span></a></li>
+      </ul>
+    </div>
+  </nav>
     <div id="titulos">
       <h4>Prontuários com aprovações pendentes</h4>
     </div>
@@ -38,7 +47,7 @@ require "footer.php";
       <div class="column4">
         <div class="square img_1-1">
 
-        <img class="imagemDog" src="../imagens/icones/cachorro.png">
+        <img class="imagemDog" src="/auauspital/src/imagens/icones/cachorro.png">
       </div>
     </div>
 
@@ -119,7 +128,9 @@ require "footer.php";
     </div>
 
 
-
+<div class="footer">
+    <h5>© 2018 - Site feito por Alexia Duarte, Caio Sabadin, Camila Marques e Zidane Gomes</h5>
+  </div>
   </body>
 
   </html>
