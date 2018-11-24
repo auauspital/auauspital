@@ -1,7 +1,7 @@
 package br.ufrrj.auauspital.model;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -31,18 +31,18 @@ public class Prontuario {
 	private Date dataRetorno;
 	@ElementCollection
 	@Column(nullable=false)
-	private ArrayList<String> motivos;
+	private List<String> motivos;
 	@ElementCollection
 	@Column(nullable=false)
-	private ArrayList<String> prescricoes;
+	private List<String> prescricoes;
 	
 
 	public Prontuario() {
 		super();
 	}
 	
-	public Prontuario(int idProntuario, Animal animal, Date dataRetorno, Date dataAtendimento, ArrayList<String> motivos,
-			ArrayList<String> prescricoes, Usuario professorResponsavel, Usuario aluno) {
+	public Prontuario(int idProntuario, Animal animal, Date dataRetorno, Date dataAtendimento, List<String> motivos,
+			List<String> prescricoes, Usuario professorResponsavel, Usuario aluno) {
 		super();
 		this.idProntuario = idProntuario;
 		this.animal = animal;
@@ -78,19 +78,19 @@ public class Prontuario {
 		this.dataAtendimento = dataAtendimento;
 	}
 
-	public ArrayList<String> getMotivos() {
+	public List<String> getMotivos() {
 		return motivos;
 	}
 
-	public void setMotivos(ArrayList<String> motivos) {
+	public void setMotivos(List<String> motivos) {
 		this.motivos = motivos;
 	}
 
-	public ArrayList<String> getPrescricoes() {
+	public List<String> getPrescricoes() {
 		return prescricoes;
 	}
 
-	public void setPrescricoes(ArrayList<String> prescricoes) {
+	public void setPrescricoes(List<String> prescricoes) {
 		this.prescricoes = prescricoes;
 	}
 

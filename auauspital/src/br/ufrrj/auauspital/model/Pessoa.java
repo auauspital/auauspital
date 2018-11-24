@@ -8,7 +8,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa {
 	
 	@Id
@@ -25,8 +25,18 @@ public abstract class Pessoa {
 		super();
 	}
 	
+	public Pessoa(String cpf) {
+		this.cpf = cpf;
+	}
+	
 	public Pessoa(int idPessoa, String nome, String cpf, byte tipo) {
 		this.idPessoa = idPessoa;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.tipo = tipo;
+	}
+	
+	public Pessoa(String nome, String cpf, byte tipo) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.tipo = tipo;

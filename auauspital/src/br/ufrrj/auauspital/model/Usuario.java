@@ -26,6 +26,11 @@ public class Usuario extends Pessoa {
 		super(idUsuario, nome, cpf, tipo);
 	}
 	
+	public Usuario(String cpf, String senha) {
+		super(cpf);
+		this.senha = senha;
+	}
+	
 	public Usuario(int idUsuario, String nome, String cpf, String matricula, byte tipo) {
 		super(idUsuario, nome, cpf, tipo);
 		this.matricula = matricula;
@@ -33,6 +38,12 @@ public class Usuario extends Pessoa {
 	
 	public Usuario(int idUsuario, String nome, String cpf, String matricula, String senha, byte tipo) {
 		super(idUsuario, nome, cpf, tipo);
+		this.matricula = matricula;
+		this.senha = senha;
+	}
+	
+	public Usuario(String nome, String cpf, String matricula, String senha, byte tipo) {
+		super(nome, cpf, tipo);
 		this.matricula = matricula;
 		this.senha = senha;
 	}

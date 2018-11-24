@@ -44,7 +44,7 @@
 					<h4>Entre e registre seus prontuários!</h4>
 				</div>
 
-				<form name="formLogin" action="" method="post">
+				<form name="formLogin" action="processadorlogin" method="post">
 					<div class="lable">
 						<div class="col_1_of_2 span_1_of_2">
 							<input type="text" class="text" placeholder="CPF"
@@ -63,9 +63,9 @@
 					</div>
 
 					<ul style="float: right !important; list-style-type: none;">
-						<li><a href="" class="login-link" name="Submit" type="submit"
+						<li><button class="login-link" name="Submit" type="submit"
 							value="Submit" onclick=" return validateForm2();">Login<span
-								class="glyphicon glyphicon-log-in"></span></a></li>
+								class="glyphicon glyphicon-log-in"></span></button></li>
 					</ul>
 				</form>
 			</div>

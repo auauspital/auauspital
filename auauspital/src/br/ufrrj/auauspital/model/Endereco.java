@@ -2,7 +2,6 @@ package br.ufrrj.auauspital.model;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
 
 @Embeddable
 public class Endereco {

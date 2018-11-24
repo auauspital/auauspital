@@ -187,7 +187,8 @@ label {
 
 .login-link, .login-link:visited, .login-link:hover, .login-link:active {
   text-decoration: none;
-  background-color: white !important;
+  background-color: transparent !important;
+  border:0;
 }
 
 /*Modificações navbar*/

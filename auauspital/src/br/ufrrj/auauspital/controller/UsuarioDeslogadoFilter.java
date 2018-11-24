@@ -3,7 +3,6 @@ package br.ufrrj.auauspital.controller;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -21,7 +20,7 @@ public class UsuarioDeslogadoFilter implements Filter {
 
 		HttpSession session = req.getSession(false);
 
-		if (session == null || session.getAttribute("loggedIn") == null) {
+		if (session == null || session.getAttribute("logado") == null) {
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
 		} else {
 			chain.doFilter(request, response);

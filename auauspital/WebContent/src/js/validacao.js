@@ -94,7 +94,6 @@ function validateForm2(){
       alert("Preencha a senha.");
       return false;
   }
-
 }
 
 /*Função para validar o form da página de prontuários por animal e animais com retorno próximo*/

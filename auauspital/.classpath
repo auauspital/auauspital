@@ -29,6 +29,5 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javassist-3.23.1-GA.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.activation-api-1.2.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hibernate-jpamodelgen-5.3.7.Final.jar"/>
-	<classpathentry kind="lib" path="META-INF/persistence.xml"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

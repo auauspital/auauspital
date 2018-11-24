@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufrrj.auauspital.model.Endereco;
+import br.ufrrj.auauspital.model.Usuario;
 
 /**
  * Servlet implementation class Teste
@@ -33,12 +34,17 @@ public class Teste extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Endereco endereco = new Endereco("Teste", "21550570", "RJ", "Paracambi", "Nada");
+
+		Usuario usuario1 = new Usuario("Aluno", "08365854023", "12345678", "aluno", (byte)1);
+		Usuario usuario2 = new Usuario("Professor", "08365854023", "12345678", "professor", (byte)0);
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("auauspital");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		em.persist(endereco);
+		em.persist(usuario1);
+		tx.commit();
+		tx.begin();
+		em.persist(usuario2);
 		tx.commit();
 		em.close();
 		emf.close();
