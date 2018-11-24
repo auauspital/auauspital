@@ -17,13 +17,12 @@ public class UsuarioLogadoFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse res = (HttpServletResponse)response;
 		
-		if((req.getSession(false)==null) && (req.getSession(false).getAttribute("logado") != null)) {
+		if((req.getSession(false)!=null)&&(req.getSession(false).getAttribute("logado") != null)) {
 			res.sendRedirect(req.getContextPath() + "/main/home.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);
 		}
-		
 	}
 
 }

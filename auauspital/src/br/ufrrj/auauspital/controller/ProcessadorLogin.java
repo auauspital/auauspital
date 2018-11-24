@@ -34,7 +34,7 @@ public class ProcessadorLogin extends HttpServlet {
 			session.setAttribute("logado", true);
 			session.setAttribute("usuario", usuario);
 			session.setMaxInactiveInterval(3600);
-			response.sendRedirect(request.getContextPath() + "/main/home");
+			response.sendRedirect(request.getContextPath() + "/main/home.jsp");
 			return;
 		}
 		
