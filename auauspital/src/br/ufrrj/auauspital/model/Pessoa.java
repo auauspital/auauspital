@@ -1,15 +1,42 @@
 package br.ufrrj.auauspital.model;
 
-public abstract class Pessoa {
-	private int idPessoa;
-	private String nome;
-	private String cpf;
-	private int tipo;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
-	public Pessoa(int idPessoa, String nome, String cpf, int tipo) {
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Pessoa {
+	
+	@Id
+	@GeneratedValue
+	private int idPessoa;
+	@Column(nullable=false)
+	private String nome;
+	@Column(length=11, nullable=false)
+	private String cpf;
+	@Column(nullable=false)
+	private byte tipo;
+
+	public Pessoa() {
+		super();
+	}
+	
+	public Pessoa(int idPessoa, String nome, String cpf, byte tipo) {
 		this.idPessoa = idPessoa;
 		this.nome = nome;
 		this.cpf = cpf;
+		this.tipo = tipo;
+	}
+	
+	public byte getTipo() {
+		return tipo;
+	}
+	
+	public void setTipo(byte tipo) {
 		this.tipo = tipo;
 	}
 

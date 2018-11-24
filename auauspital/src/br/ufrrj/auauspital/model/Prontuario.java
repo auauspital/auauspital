@@ -3,16 +3,44 @@ package br.ufrrj.auauspital.model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Prontuario {
-	private int idProntuario;
-	private Animal animal;
-	private Date dataRetorno;
-	private Date dataAtendimento;
-	private ArrayList<String> motivos;
-	private ArrayList<String> prescricoes;
-	private Usuario professorResponsavel;
-	private Usuario aluno;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity
+public class Prontuario {
+	@Id
+	@GeneratedValue
+	private int idProntuario;
+	@ManyToOne
+	private Animal animal;
+	@ManyToOne
+	private Usuario professorResponsavel;
+	@ManyToOne
+	private Usuario aluno;
+	@Temporal(TemporalType.DATE)
+	@Column(nullable=false)
+	private Date dataAtendimento;
+	@Temporal(TemporalType.DATE)
+	@Column(nullable=true)
+	private Date dataRetorno;
+	@ElementCollection
+	@Column(nullable=false)
+	private ArrayList<String> motivos;
+	@ElementCollection
+	@Column(nullable=false)
+	private ArrayList<String> prescricoes;
+	
+
+	public Prontuario() {
+		super();
+	}
+	
 	public Prontuario(int idProntuario, Animal animal, Date dataRetorno, Date dataAtendimento, ArrayList<String> motivos,
 			ArrayList<String> prescricoes, Usuario professorResponsavel, Usuario aluno) {
 		super();

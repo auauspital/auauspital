@@ -1,12 +1,26 @@
 package br.ufrrj.auauspital.model;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+
+@Embeddable
 public class Endereco {
-	private int idEndereco;
+	
+	@Column(nullable=false)
 	private String logradouro;
+	@Column(length=11, nullable=false)
 	private String cep;
+	@Column(length=2, nullable=false)
 	private String uf;
+	@Column(nullable=false)
 	private String cidade;
+	@Column(nullable=true)
 	private String complemento;
+	
+	public Endereco() {
+		super();
+	}
 
 	public Endereco(String logradouro, String cep, String uf, String cidade, String complemento) {
 		super();

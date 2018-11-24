@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+	<persistence-unit name="auauspital" transaction-type="RESOURCE_LOCAL">
+		<provider>
+			org.eclipse.persistence.jpa.PersistenceProvider
+		</provider>
+		<exclude-unlisted-classes>
+			false
+		</exclude-unlisted-classes>
+		<properties>
+			<!-- define o postgres como o dialeto do Hibernate -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			
+			<!-- bota o hibernate pra fazer o schema pra gente e mexer nele sempre que necessario -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			
+			<!-- formata as queries e as exibe no console, util para debugar -->
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			
+			<!-- o grosso de acesso ao BD -->
+			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/auauspital2" />
+			<property name="javax.persistence.jdbc.user" value="postgres" />
+			<property name="javax.persistence.jdbc.password" value="postgres" />
+		</properties>				
+	</persistence-unit>
+</persistence>
