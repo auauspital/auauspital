@@ -138,8 +138,37 @@
             <div class="form-group">
               <!-- UF -->
               <label for="full_name_id" class="control-label col-sm-3" id="prontuario">UF:</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="uf">
+              <div class="col-sm-9">          
+				<select class="form-control" id="full_name_id" name="uf">
+				    <option value="AC">Acre</option>
+				    <option value="AL">Alagoas</option>
+				    <option value="AP">Amapá</option>
+				    <option value="AM">Amazonas</option>
+				    <option value="BA">Bahia</option>
+				    <option value="CE">Ceará</option>
+				    <option value="DF">Distrito Federal</option>
+				    <option value="ES">Espírito Santo</option>
+				    <option value="GO">Goiás</option>
+				    <option value="MA">Maranhão</option>
+				    <option value="MT">Mato Grosso</option>
+				    <option value="MS">Mato Grosso do Sul</option>
+				    <option value="MG">Minas Gerais</option>
+				    <option value="PA">Pará</option>
+				    <option value="PB">Paraíba</option>
+				    <option value="PR">Paraná</option>
+				    <option value="PE">Pernambuco</option>
+				    <option value="PI">Piauí</option>
+				    <option value="RJ">Rio de Janeiro</option>
+				    <option value="RN">Rio Grande do Norte</option>
+				    <option value="RS">Rio Grande do Sul</option>
+				    <option value="RO">Rondônia</option>
+				    <option value="RR">Roraima</option>
+				    <option value="SC">Santa Catarina</option>
+				    <option value="SP">São Paulo</option>
+				    <option value="SE">Sergipe</option>
+				    <option value="TO">Tocantins</option>
+				    <option value="ET">Estrangeiro</option>
+				</select>
 
               </div>
             </div>
@@ -168,7 +197,7 @@
 		              <!-- Nome do(a) aluno(a) responsável -->
 		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Aluno responsável:</label>
 		              <div class="col-sm-9">
-		                <select class="form-control" id="full_name_id" name="nomeAluno">
+		                <select class="form-control" id="full_name_id" name="idMembro">
 		                	<c:forEach items="${membrosCadastro}" var="aluno">
 		                		<option value="${aluno.id}">
 		                			<c:out value="${aluno.nome}" /> (#<c:out value="${aluno.matricula}" />)
@@ -189,10 +218,10 @@
 		            </div>
 		            
 		 			<div class="form-group">
-		              <!-- Nome do(a) aluno(a) responsável -->
+		              <!-- Nome do(a) professor(a) responsável -->
 		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Professor responsável:</label>
 		              <div class="col-sm-9">
-		                <select class="form-control" id="full_name_id" name="nomeProf">
+		                <select class="form-control" id="full_name_id" name="idMembro">
 		                	<c:forEach items="${membrosCadastro}" var="professor">
 		                		<option value="${professor.id}">
 		                			<c:out value="${professor.nome}" /> (#<c:out value="${professor.matricula}" />)
@@ -212,7 +241,15 @@
 
               </div>
             </div>
+            
+            <div class="form-group">
+              <!-- Prescrição -->
+              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Prescrições:</label>
+              <div class="col-sm-9">
+                <textarea class="form-control" cols="40" id="message" name="prescricoes" rows="5"></textarea>
 
+              </div>
+            </div>
 
             <div class="form-group">
               <!-- Retorno do paciente -->
@@ -221,11 +258,11 @@
                 <div class="radio">
 
                   <label class="radio-inline">
-                  <input type="radio" onclick="javascript:yesnoCheck();" name="yesno"  id="yesCheck">Sim
+                  <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" value="y"  id="yesCheck">Sim
                 </label>
 
                   <label class="radio-inline">
-                  <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" checked id="noCheck">Não
+                  <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" value = "n" checked id="noCheck">Não
                 </label>
 
                   <div id="ifYes" style="display:none">

@@ -1,5 +1,6 @@
 package br.ufrrj.auauspital.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -38,6 +39,14 @@ public class Animal {
 		this.cor = cor;
 		this.nome = nome;
 		this.idade = idade;
+		this.proprietario = proprietario;
+	}
+	
+	public Animal(String nome, String tipo, int idade, String cor, Proprietario proprietario) {
+		this.nome = nome;
+		this.tipo = tipo;
+		this.idade = idade;
+		this.cor = cor;
 		this.proprietario = proprietario;
 	}
 

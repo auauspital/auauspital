@@ -20,6 +20,13 @@ public class UsuarioDao extends DAO<Usuario> {
 		}
 	}
 	
+	public Usuario findById(int idPessoa) {
+		Query q = getManager().createQuery("SELECT u FROM Usuario u WHERE u.id = :idPessoa");
+		q.setParameter("idPessoa", idPessoa);
+		Usuario usuarioRes = (Usuario)q.getSingleResult();
+		return usuarioRes;
+	}
+	
 	public Usuario findLogin(Usuario usuario) {
 		Query q = getManager().createQuery("SELECT u FROM Usuario u WHERE u.cpf = :cpf AND u.senha = :senha");
 		q.setParameter("cpf", usuario.getCpf());

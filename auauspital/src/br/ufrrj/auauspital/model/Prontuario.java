@@ -36,13 +36,15 @@ public class Prontuario {
 	@Column(nullable=false)
 	@Lob
 	private String prescricoes;
+	@Column(nullable=false)
+	private boolean isAprovado;
 	
 
 	public Prontuario() {
 		super();
 	}
 	
-	public Prontuario(int idProntuario, Animal animal, Date dataRetorno, Date dataAtendimento, Usuario professorResponsavel, Usuario aluno) {
+	public Prontuario(int idProntuario, Animal animal, Date dataRetorno, Date dataAtendimento, Usuario professorResponsavel, Usuario aluno, boolean isAprovado) {
 		super();
 		this.idProntuario = idProntuario;
 		this.animal = animal;
@@ -50,6 +52,27 @@ public class Prontuario {
 		this.dataAtendimento = dataAtendimento;
 		this.professorResponsavel = professorResponsavel;
 		this.aluno = aluno;
+		this.isAprovado = isAprovado;
+	}
+	
+	public Prontuario(Animal animal, Date dataRetorno, Date dataAtendimento, Usuario professorResponsavel, Usuario aluno, boolean isAprovado, String motivos, String prescricoes) {
+		super();
+		this.animal = animal;
+		this.dataRetorno = dataRetorno;
+		this.dataAtendimento = dataAtendimento;
+		this.professorResponsavel = professorResponsavel;
+		this.aluno = aluno;
+		this.isAprovado = isAprovado;
+		this.motivos = motivos;
+		this.prescricoes = prescricoes;
+	}
+	
+	public boolean isAprovado() {
+		return this.isAprovado;
+	}
+	
+	public void setIsAprovado(boolean isAprovado) {
+		this.isAprovado = isAprovado;
 	}
 
 	public Animal getAnimal() {

@@ -1,0 +1,26 @@
+!SESSION 2018-11-28 14:34:21.113 -----------------------------------------------
+eclipse.buildId=4.7.3.M20180330-0640
+java.version=1.8.0_171
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.jee.product
+Command-line arguments:  -data /home/caio/Área de trabalho/auauspital2/auauspital -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.jee.product
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2018-11-28 14:34:39.970
+!MESSAGE Removing part descriptor with the 'org.eclipse.tips.ide.tipPart' id and the 'Tip of the Day' description. Points to the invalid 'bundleclass://org.eclipse.tips.ide/org.eclipse.tips.ide.internal.TipPart' class.
+
+!ENTRY org.eclipse.epp.logging.aeri.ide 2 17 2018-11-28 14:34:40.988
+!MESSAGE Server ‘org.eclipse.epp.logging.aeri.ide.server’ failed with exception: Format version is not supported (resource BufferedChecksumIndexInput(MMapIndexInput(path="/home/caio/Área de trabalho/auauspital2/auauspital/.metadata/.plugins/org.eclipse.epp.logging.aeri.ide/org.eclipse.epp.logging.aeri.ide.server/http-cache.lucene60/segments_1"))): 7 (needs to be between 4 and 6). ; version: 2.0.7.v20170906-1327
+!STACK 0
+org.apache.lucene.index.IndexFormatTooNewException: Format version is not supported (resource BufferedChecksumIndexInput(MMapIndexInput(path="/home/caio/Área de trabalho/auauspital2/auauspital/.metadata/.plugins/org.eclipse.epp.logging.aeri.ide/org.eclipse.epp.logging.aeri.ide.server/http-cache.lucene60/segments_1"))): 7 (needs to be between 4 and 6)
+	at org.apache.lucene.codecs.CodecUtil.checkHeaderNoMagic(CodecUtil.java:216)
+	at org.apache.lucene.index.SegmentInfos.readCommit(SegmentInfos.java:297)
+	at org.apache.lucene.index.SegmentInfos.readCommit(SegmentInfos.java:284)
+	at org.apache.lucene.index.IndexWriter.<init>(IndexWriter.java:910)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.rest.LuceneHttpCacheStorage.<init>(LuceneHttpCacheStorage.java:71)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.rest.RestBasedProblemsHistory.<init>(RestBasedProblemsHistory.java:83)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.createRestBasedProblemsHistory(ServerConnection.java:183)
+	at org.eclipse.epp.internal.logging.aeri.ide.server.mars.ServerConnection.startUp(ServerConnection.java:140)
+	at com.google.common.util.concurrent.AbstractIdleService$DelegateService$1.run(AbstractIdleService.java:62)
+	at com.google.common.util.concurrent.Callables$4.run(Callables.java:122)
+	at java.lang.Thread.run(Thread.java:748)

@@ -29,6 +29,10 @@ public abstract class Pessoa {
 		this.cpf = cpf;
 	}
 	
+	public Pessoa(String nome, String cpf) {
+		this.cpf = cpf;
+	}
+	
 	public Pessoa(int idPessoa, String nome, String cpf, byte tipo) {
 		this.idPessoa = idPessoa;
 		this.nome = nome;
