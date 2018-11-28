@@ -29,8 +29,8 @@
       </div>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="home.php">Home<span class="glyphicon glyphicon-home"></span></a></li>
-        <li><a href="login.php">Sair<span class="glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="home.jsp">Home<span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="logoutprocessor">Sair<span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
     </div>
   </nav>

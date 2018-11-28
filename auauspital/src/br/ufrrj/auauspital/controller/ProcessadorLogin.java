@@ -23,7 +23,7 @@ public class ProcessadorLogin extends HttpServlet {
 		UsuarioDao usuarioDao = new UsuarioDao();
 		usuario = usuarioDao.findLogin(usuario);
 		if(usuario==null) {
-			response.sendRedirect(request.getContextPath() + "index.jsp");
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
 			return;
 		} else {
 			if(request.getSession(false)!=null) {

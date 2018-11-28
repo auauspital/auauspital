@@ -47,6 +47,10 @@ public class Usuario extends Pessoa {
 		this.matricula = matricula;
 		this.senha = senha;
 	}
+	
+	public int getId() {
+		return super.getId();
+	}
 
 	public String getMatricula() {
 		return matricula;

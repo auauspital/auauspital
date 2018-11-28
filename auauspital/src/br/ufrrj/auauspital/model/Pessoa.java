@@ -42,6 +42,10 @@ public abstract class Pessoa {
 		this.tipo = tipo;
 	}
 	
+	public int getId() {
+		return this.idPessoa;
+	}
+	
 	public byte getTipo() {
 		return tipo;
 	}

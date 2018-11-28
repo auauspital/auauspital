@@ -8,6 +8,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,27 +30,24 @@ public class Prontuario {
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=true)
 	private Date dataRetorno;
-	@ElementCollection
 	@Column(nullable=false)
-	private List<String> motivos;
-	@ElementCollection
+	@Lob
+	private String motivos;
 	@Column(nullable=false)
-	private List<String> prescricoes;
+	@Lob
+	private String prescricoes;
 	
 
 	public Prontuario() {
 		super();
 	}
 	
-	public Prontuario(int idProntuario, Animal animal, Date dataRetorno, Date dataAtendimento, List<String> motivos,
-			List<String> prescricoes, Usuario professorResponsavel, Usuario aluno) {
+	public Prontuario(int idProntuario, Animal animal, Date dataRetorno, Date dataAtendimento, Usuario professorResponsavel, Usuario aluno) {
 		super();
 		this.idProntuario = idProntuario;
 		this.animal = animal;
 		this.dataRetorno = dataRetorno;
 		this.dataAtendimento = dataAtendimento;
-		this.motivos = motivos;
-		this.prescricoes = prescricoes;
 		this.professorResponsavel = professorResponsavel;
 		this.aluno = aluno;
 	}
@@ -78,19 +76,19 @@ public class Prontuario {
 		this.dataAtendimento = dataAtendimento;
 	}
 
-	public List<String> getMotivos() {
+	public String getMotivos() {
 		return motivos;
 	}
 
-	public void setMotivos(List<String> motivos) {
+	public void setMotivos(String motivos) {
 		this.motivos = motivos;
 	}
 
-	public List<String> getPrescricoes() {
+	public String getPrescricoes() {
 		return prescricoes;
 	}
 
-	public void setPrescricoes(List<String> prescricoes) {
+	public void setPrescricoes(String prescricoes) {
 		this.prescricoes = prescricoes;
 	}
 

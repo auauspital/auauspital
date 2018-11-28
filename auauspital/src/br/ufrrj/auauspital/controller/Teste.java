@@ -35,8 +35,8 @@ public class Teste extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		Usuario usuario1 = new Usuario("Aluno", "08365854023", "12345678", "aluno", (byte)1);
-		Usuario usuario2 = new Usuario("Professor", "08365854023", "12345678", "professor", (byte)0);
+		Usuario usuario2 = new Usuario("Professor", "00000000000", "12345678", "professor", (byte)0);
+		Usuario usuario1 = new Usuario("Aluno", "00000000001", "12345678", "aluno", (byte)1);
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("auauspital");
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction tx = em.getTransaction();

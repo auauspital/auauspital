@@ -29,7 +29,7 @@
       </div>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="login.php">Sair<span class="glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="logoutprocessor">Sair<span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
     </div>
   </nav>
@@ -37,7 +37,7 @@
     <!-- Primeira fileira de botões -->
     <div class="grid">
       <div class="row">
-        <a href="atendimento.php">
+        <a href="atendimento.jsp">
           <div class="box">
 
             <div class="inner" style="background-color:#57B5B4">
@@ -48,18 +48,33 @@
         </a>
         </div>
 
-        <a href="aprovações.php">
-          <div class="box">
+		<c:choose>
+			<c:when test="${usuario.tipo == 0}">
+		        <a href="aprovações.jsp">
+		          <div class="box">
+		
+		            <div class="inner" style="background-color:#D37B93">
+		
+		              <img style="height: 90%!important;width: 70%!important;" src="/auauspital/src/imagens/icones/2.png">
+		
+		            </div>
+		        </a>
+		        </div>			
+			</c:when>
+			<c:otherwise>
+		          <div class="box" style="border:0 !important;outline:0 !important;">
+		
+		            <div class="inner" style="border:0 !important;outline:0 !important;">
+		
+		              <img style="height: 90%!important;width: 70%!important;" src="/auauspital/src/imagens/icones/pawprint.png">
+		
+		            </div>
+		        </div>		
+			</c:otherwise>
+		</c:choose>
+		
 
-            <div class="inner" style="background-color:#D37B93">
-
-              <img style="height: 90%!important;width: 70%!important;" src="/auauspital/src/imagens/icones/2.png">
-
-            </div>
-        </a>
-        </div>
-
-        <a href="atendAluno.php">
+        <a href="atendAluno.jsp">
           <div class="box">
 
             <div class="inner" style="background-color:#FFAB00">
@@ -74,7 +89,7 @@
     <!-- Segunda fileira de botões -->
     <div class="grid">
       <div class="row">
-        <a href="atendProfessor.php">
+        <a href="atendProfessor.jsp">
           <div class="box">
 
             <div class="inner" style="background-color:#EAEAEA">
@@ -85,7 +100,7 @@
         </a>
         </div>
 
-        <a href="prontAnimal.php">
+        <a href="prontAnimal.jsp">
           <div class="box">
 
             <div class="inner" style="background-color:#EFC589">
@@ -96,7 +111,7 @@
         </a>
         </div>
 
-        <a href="animalRetorno.php">
+        <a href="animalRetorno.jsp">
           <div class="box">
 
             <div class="inner" style="background-color:#CDD7DB">

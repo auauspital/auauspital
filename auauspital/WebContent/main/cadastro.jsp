@@ -33,8 +33,8 @@
       </div>
 
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="home.php">Home<span class="glyphicon glyphicon-home"></span></a></li>
-        <li><a href="login.php">Sair<span class="glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="home.jsp">Home<span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="logoutprocessor">Sair<span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
     </div>
   </nav>
@@ -52,7 +52,7 @@
 
         <div class="form-group">
 
-          <form class="form-horizontal" id='form-cadastro' name="formCadastro" action="/action_page.php" onsubmit="return validateForm()" method="post">
+          <form class="form-horizontal" id='form-cadastro' name="formCadastro" action="cadastraanimal" onsubmit="return validateForm()" method="post">
 
             <div class="form-group">
               <!-- Nome do animal -->
@@ -98,17 +98,8 @@
 
               </div>
             </div>
-
-            <div class="form-group">
-              <!-- Endereço -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Endereço:</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="endereço">
-
-              </div>
-            </div>
-
-            <div class="form-group">
+            
+			<div class="form-group">
               <!-- CPF -->
               <label for="full_name_id" class="control-label col-sm-3" id="prontuario">CPF:</label>
               <div class="col-sm-9">
@@ -118,40 +109,100 @@
             </div>
 
             <div class="form-group">
-              <!-- Nome do(a) aluno(a) responsável -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Nome do(a) aluno(a) responsável:</label>
+              <!-- Rua -->
+              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Logradouro:</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="nomeAluno">
+                <input type="text" class="form-control" id="full_name_id" name="logradouro">
 
               </div>
             </div>
-
+            
             <div class="form-group">
-              <!-- Matrícula do(a) aluno(a) responsável -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Matrícula do(a) aluno(a) responsável:</label>
+              <!-- Complemento -->
+              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Complemento:</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="matriculaAluno">
+                <input type="text" class="form-control" id="full_name_id" name="complemento">
 
               </div>
             </div>
-
+            
             <div class="form-group">
-              <!-- Nome do(a) professor(a) responsável -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Nome do(a) prof(a) responsável:</label>
+              <!-- Cidade -->
+              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Cidade:</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="nomeProf">
+                <input type="text" class="form-control" id="full_name_id" name="cidade">
 
               </div>
             </div>
-
+            
             <div class="form-group">
-              <!-- Matrícula do(a) prof(a) responsável -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Matrícula do(a) prof(a) responsável:</label>
+              <!-- UF -->
+              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">UF:</label>
               <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="matriculaProf">
+                <input type="text" class="form-control" id="full_name_id" name="uf">
 
               </div>
             </div>
+            
+            <div class="form-group">
+              <!-- CEP -->
+              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">CEP:</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="full_name_id" name="cep">
+
+              </div>
+            </div>
+            
+            <c:choose>
+            	<c:when test="${usuario.tipo==0}">
+		 			<div class="form-group">
+		              <!-- Nome do(a) professor(a) responsável -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Prof(a). responsável:</label>
+		              <div class="col-sm-9">
+		                <input disabled="disabled" value="<c:out value="${usuario.nome}" />" type="text" class="form-control" id="full_name_id" name="nomeProf">
+						
+		              </div>
+		            </div>
+		            
+		 			<div class="form-group">
+		              <!-- Nome do(a) aluno(a) responsável -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Aluno responsável:</label>
+		              <div class="col-sm-9">
+		                <select class="form-control" id="full_name_id" name="nomeAluno">
+		                	<c:forEach items="${membrosCadastro}" var="aluno">
+		                		<option value="${aluno.id}">
+		                			<c:out value="${aluno.nome}" /> (#<c:out value="${aluno.matricula}" />)
+		                		</option>
+		                	</c:forEach>
+						</select>
+		              </div>
+		            </div> 		           	
+            	</c:when>
+            	<c:otherwise>
+		 			<div class="form-group">
+		              <!-- Nome do(a) aluno(a) responsável -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Aluno responsável:</label>
+		              <div class="col-sm-9">
+		                <input disabled="disabled" value="<c:out value="${usuario.nome}" />" type="text" class="form-control" id="full_name_id" name="nomeAluno">
+						
+		              </div>
+		            </div>
+		            
+		 			<div class="form-group">
+		              <!-- Nome do(a) aluno(a) responsável -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Professor responsável:</label>
+		              <div class="col-sm-9">
+		                <select class="form-control" id="full_name_id" name="nomeProf">
+		                	<c:forEach items="${membrosCadastro}" var="professor">
+		                		<option value="${professor.id}">
+		                			<c:out value="${professor.nome}" /> (#<c:out value="${professor.matricula}" />)
+		                		</option>
+		                	</c:forEach>
+						</select>
+		              </div>
+		            </div>             	
+            	</c:otherwise>
+            </c:choose>
 
             <div class="form-group">
               <!-- Motivo da consulta -->
