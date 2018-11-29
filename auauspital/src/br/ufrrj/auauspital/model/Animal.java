@@ -15,21 +15,29 @@ public class Animal {
 	@Id
 	@GeneratedValue
 	private int idAnimal;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String tipo;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String cor;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String nome;
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private int idade;
 	@ManyToOne
 	private Proprietario proprietario;
-	@OneToMany(mappedBy="animal")
+	@OneToMany(mappedBy = "animal")
 	private List<Prontuario> prontuarios;
-	
+
 	public Animal() {
 		super();
+	}
+
+	public int getIdAnimal() {
+		return idAnimal;
+	}
+
+	public void setIdAnimal(int idAnimal) {
+		this.idAnimal = idAnimal;
 	}
 
 	public Animal(int idAnimal, String tipo, String cor, String nome, int idade, Proprietario proprietario) {
@@ -41,7 +49,7 @@ public class Animal {
 		this.idade = idade;
 		this.proprietario = proprietario;
 	}
-	
+
 	public Animal(String nome, String tipo, int idade, String cor, Proprietario proprietario) {
 		this.nome = nome;
 		this.tipo = tipo;

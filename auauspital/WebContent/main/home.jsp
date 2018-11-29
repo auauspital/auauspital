@@ -37,7 +37,7 @@
     <!-- Primeira fileira de botões -->
     <div class="grid">
       <div class="row">
-        <a href="atendimento.jsp">
+        <a href="loadtelaatendimento">
           <div class="box">
 
             <div class="inner" style="background-color:#57B5B4">

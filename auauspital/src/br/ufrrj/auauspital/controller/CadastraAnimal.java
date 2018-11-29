@@ -32,40 +32,34 @@ public class CadastraAnimal extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		DAO.begin();
-		
-		/*
-		 * Apenas pega os dados do proprietário e do animal
-		 */
+		boolean isEditarCadastrado = Boolean.parseBoolean(request.getParameter("isEditarCadastrado"));
 		
 		String logradouro = request.getParameter("logradouro");
 		String complemento = request.getParameter("complemento");
 		String cidade = request.getParameter("cidade");
 		String uf = request.getParameter("uf");
 		String cep = request.getParameter("cep");
-		Endereco endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
+		Endereco endereco = null;
 		
 		String nomeDono = request.getParameter("nomeDono");
 		String cpf = request.getParameter("cpf");
-		Proprietario proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
+		Proprietario proprietario = null;
 		
 		String nomePet = request.getParameter("nomePet");
 		String tipo = request.getParameter("especie");
 		int idade = Integer.parseInt(request.getParameter("idadePet"));
 		String cor = request.getParameter("corPet");
-		AnimalDao animalDao = new AnimalDao();
-		Animal animal = new Animal(nomePet, tipo, idade, cor, proprietario);
+		Animal animal = null;
 		
-		proprietario.addAnimal(animal);
+		
+		AnimalDao animalDao = new AnimalDao();
 		ProprietarioDao proprietarioDao = new ProprietarioDao();
-		animalDao.persist(animal);
-		proprietarioDao.persist(proprietario);
+		ProntuarioDao prontuarioDao = new ProntuarioDao();
 		
 		/*
 		 * Pega o membro (professor ou aluno) que fez o atendimento junto
 		 * ao usuario que esta logado
 		 */
-		
 		UsuarioDao usuarioDao = new UsuarioDao();
 		Usuario usuarioLogado = (Usuario)request.getSession(false).getAttribute("usuario");
 		int idMembro = Integer.parseInt(request.getParameter("idMembro"));
@@ -74,7 +68,6 @@ public class CadastraAnimal extends HttpServlet {
 		/*
 		 * Pega os dados relativos ao prontuario em si
 		 */
-		
 		String motivo = request.getParameter("motivo");
 		String prescricoes = request.getParameter("prescricoes");
 		Date dataAtendimento = new Date();
@@ -92,25 +85,50 @@ public class CadastraAnimal extends HttpServlet {
 		}
 		
 		Prontuario prontuario = null;
-		if(usuarioLogado.getTipo()==0) {
+		
+		if(!isEditarCadastrado) {
+			
 			/*
-			 * define o professor como responsavel, e o membro e um aluno e,
-			 * como foi o professor quem cadastrou, ja aprova o prontuario
-			 * imediatamente.
+			 * Esta parte do IF realiza o cadastramento de um novo animal
 			 */
-			prontuario = new Prontuario(animal, dataRetorno, dataAtendimento, usuarioLogado, membro, true, motivo, prescricoes);
+			
+			DAO.begin();
+			
+			endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
+			proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
+			animal = new Animal(nomePet, tipo, idade, cor, proprietario);
+			proprietario.addAnimal(animal);
+			animalDao.persist(animal);
+			proprietarioDao.persist(proprietario);		
+
+			if(usuarioLogado.getTipo()==0) {
+				/*
+				 * define o professor como responsavel, e o membro e um aluno e,
+				 * como foi o professor quem cadastrou, ja aprova o prontuario
+				 * imediatamente.
+				 */
+				prontuario = new Prontuario(animal, dataRetorno, dataAtendimento, usuarioLogado, membro, true, motivo, prescricoes);
+			} else {
+				/*
+				 * define o aluno como responsavel, e o membro e um professor e,
+				 * como foi o aluno quem cadastrou, coloca o prontuario ainda como
+				 * nao-aprovado
+				 */
+				prontuario = new Prontuario(animal, dataRetorno, dataAtendimento, membro, usuarioLogado, false, motivo, prescricoes);
+			}
+			
+			prontuarioDao.persist(prontuario);
+			DAO.commit();
 		} else {
 			/*
-			 * define o aluno como responsavel, e o membro e um professor e,
-			 * como foi o aluno quem cadastrou, coloca o prontuario ainda como
-			 * nao-aprovado
+			 * Esta parte do IF realiza o cadastramento do prontuario, mas
+			 * para um animal que ja exista.
 			 */
-			prontuario = new Prontuario(animal, dataRetorno, dataAtendimento, membro, usuarioLogado, false, motivo, prescricoes);
+			
+			int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
+			animal = animalDao.findById(idAnimal);
+			// agora, preciso ver como fazer a parte do mudar o dono antes de continuar...
 		}
-		
-		ProntuarioDao prontuarioDao = new ProntuarioDao();
-		prontuarioDao.persist(prontuario);
-		DAO.commit();
 		
 		response.sendRedirect(request.getContextPath() + "/main/home.jsp");
 		return;

@@ -19,6 +19,10 @@ public class Proprietario extends Pessoa {
 		super();
 	}
 	
+	public Endereco getEndereco() {
+		return this.endereco;
+	}
+	
 	public Proprietario(int idProprietario, String nome, String cpf, byte tipo) {
 		super(idProprietario, nome, cpf, tipo);
 	}
@@ -33,6 +37,18 @@ public class Proprietario extends Pessoa {
 		super(idProprietario, nome, cpf, tipo);
 		this.endereco = endereco;
 		this.animais = animais;
+	}
+	
+	public String getNome() {
+		return super.getNome();
+	}
+	
+	public String getCpf() {
+		return super.getCpf();
+	}
+	
+	public int getIdProprietario() {
+		return super.getId();
 	}
 	
 	public void addAnimal(Animal animal) {
