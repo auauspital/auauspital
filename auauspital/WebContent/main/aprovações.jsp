@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
   <html lang="pt-br">
 
@@ -23,6 +24,42 @@
     <!--===============================================================================================-->
     <script src="/auauspital/src/js/verificação.js"></script>
     <!--===============================================================================================-->
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		
+    		$("#btn-envio").click(function() {
+    			if(document.getElementById("field-idProntuario").value == 0) {
+    				alert("Por favor, selecione algum prontuário para aprovar.");
+    				return false;
+    			}
+    		});
+    		
+    		<c:forEach items="${prontuarios}" var="prontuario">
+    			$('#prontuario-<c:out value="${prontuario.idProntuario}" />').click(function() {
+    				document.getElementById("field-idProntuario").value = <c:out value="${prontuario.idProntuario}" />;
+    				$('#exibição').html("");
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", "<h3>Prontuário do(a) aluno(a) <c:out value="${prontuario.aluno.nome}" /> (<fmt:formatDate pattern = "dd/MM/yyyy" value = "${prontuario.dataAtendimento}" />).</h3>");
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", "<p><b>Nome:</b> <c:out value="${prontuario.animal.nome}" />.</p>");
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", "<p><b>Espécie:</b> <c:out value="${prontuario.animal.tipo}" />.</p>");
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", "<p><b>Cor:</b> <c:out value="${prontuario.animal.cor}" />.</p>");
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", "<p><b>Idade:</b> <c:out value="${prontuario.animal.idade}" />.</p>");
+    				<c:if test="${not empty prontuario.dataRetorno}">
+    					document.getElementById("exibição").insertAdjacentHTML("beforeend", "<p><b>Data para Retorno:</b> <fmt:formatDate pattern = "dd/MM/yyyy" value = "${prontuario.dataRetorno}" />.</p>");
+    				</c:if>
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", "<h3>Motivo da Visita</h3>");
+    				var motivos = "<c:out value="${prontuario.motivos}" />";
+    				motivos = motivos.replace(/\&gt\;/gi, ">");
+    				motivos = motivos.replace(/\&lt\;/gi, "<");
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", motivos);
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", "<h3>Prescrições</h3>");
+    				var prescricoes = "<c:out value="${prontuario.prescricoes}" />";
+    				prescricoes = prescricoes.replace(/\&gt\;/gi, ">");
+    				prescricoes = prescricoes.replace(/\&lt\;/gi, "<");
+    				document.getElementById("exibição").insertAdjacentHTML("beforeend", prescricoes);
+    			});
+    		</c:forEach>
+    	});
+    </script>
   </head>
 
 
@@ -58,38 +95,17 @@
         <br>
         <div class="form-group">
 
-          <form class="form-horizontal" id='form-cadastro'>
-
+          <form class="form-horizontal" id='form-cadastro' method="post" action="aprovarprontuario">
+			<input type="hidden" id="field-idProntuario" name="idProntuario" value="0" />
             <div id="table-overflow">
               <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action">
-
-                  <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-
-                  <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-
-                  <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-
-                  <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action">
-                  <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-                </a>
+              	<c:forEach items="${prontuarios}" var="prontuario">
+              		<a id="prontuario-<c:out value="${prontuario.idProntuario}" />" href="#" class="list-group-item list-group-item-action">
+              			<h6>
+              				Nome: <c:out value="${prontuario.animal.nome}" /> (<c:out value="${prontuario.animal.tipo}" />) || Cadastrado pelo(a) médico(a) <c:out value="${prontuario.aluno.nome}" />, em <fmt:formatDate pattern = "dd/MM/yyyy" value = "${prontuario.dataAtendimento}" />
+              			</h6>
+              		</a>
+              	</c:forEach>
               </div>
             </div>
 
@@ -98,26 +114,14 @@
         </div>
         <br>
         <div id="exibição">
-          <h3>Wuthering Heights - Chapter One</h3>
-          <p>
-            1801. - I have just returned from a visit to my landlord - the solitary neighbour that I shall be troubled with. This is certainly a beautiful country! In all England, I do not believe that I could have fixed on a situation so completely removed from the stir of society. A perfect misanthropist's heaven: and Mr. Heathcliff and I are such a suitable pair to divide the desolation between us. A capital fellow! He little imagined how my heart warmed towards him when I beheld his black eyes withdraw so suspiciously under their brows, as I rode up, and when his fingers sheltered themselves, with a jealous resolution, still further in his waistcoat, as I announced my name.
-            </p>
-            <p>  'Mr. Heathcliff?' I said.
-              </p>
-            <p>  A nod was the answer.
-              </p>
-              <p>'Mr. Lockwood, your new tenant, sir. I do myself the honour of calling as soon as possible after my arrival, to express the hope that I have not inconvenienced you by my perseverance in soliciting the occupation of Thrushcross Grange: I heard yesterday you had had some thoughts - '
-                </p>
-              <p>'Thrushcross Grange is my own, sir,' he interrupted, wincing. 'I should not allow any one to inconvenience me, if I could hinder it - walk in!'
-
-            <p>  The 'walk in' was uttered with closed teeth, and expressed the sentiment, 'Go to the Deuce:' even the gate over which he leant manifested no sympathising movement to the words; and I think that circumstance determined me to accept the invitation: I felt interested in a man who seemed more exaggeratedly reserved than myself.
-                      </p>
+          <h3>Prontuários</h3>
+          <p>Clique em um dos prontuários da lista acima para visualizá-lo aqui.</p>
         </div>
 
 
         <br><br>
         <div id="imagemButton">
-          <button type="submit" class="btn btn-form" style="margin-top:0;">Autorizar prontuário</button>
+          <button id="btn-envio" type="submit" class="btn btn-form" style="margin-top:0;">Autorizar prontuário</button>
         </div>
 
           <div class="push"style="height:100px;"></div>

@@ -50,7 +50,7 @@
 
 		<c:choose>
 			<c:when test="${usuario.tipo == 0}">
-		        <a href="aprovações.jsp">
+		        <a href="loadtelaaprovarprontuarios">
 		          <div class="box">
 		
 		            <div class="inner" style="background-color:#D37B93">

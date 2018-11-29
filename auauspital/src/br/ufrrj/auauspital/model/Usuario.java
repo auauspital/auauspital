@@ -51,6 +51,10 @@ public class Usuario extends Pessoa {
 	public int getId() {
 		return super.getId();
 	}
+	
+	public String getNome() {
+		return super.getNome();
+	}
 
 	public String getMatricula() {
 		return matricula;

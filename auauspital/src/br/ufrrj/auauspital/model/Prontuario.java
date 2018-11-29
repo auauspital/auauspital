@@ -30,11 +30,9 @@ public class Prontuario {
 	@Temporal(TemporalType.DATE)
 	@Column(nullable=true)
 	private Date dataRetorno;
-	@Column(nullable=false)
-	@Lob
+	@Column(nullable=false, columnDefinition="TEXT")
 	private String motivos;
-	@Column(nullable=false)
-	@Lob
+	@Column(nullable=false, columnDefinition="TEXT")
 	private String prescricoes;
 	@Column(nullable=false)
 	private boolean isAprovado;
@@ -67,6 +65,14 @@ public class Prontuario {
 		this.prescricoes = prescricoes;
 	}
 	
+	public int getIdProntuario() {
+		return idProntuario;
+	}
+
+	public void setIdProntuario(int idProntuario) {
+		this.idProntuario = idProntuario;
+	}
+
 	public boolean isAprovado() {
 		return this.isAprovado;
 	}
