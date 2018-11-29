@@ -85,50 +85,61 @@ public class CadastraAnimal extends HttpServlet {
 		}
 		
 		Prontuario prontuario = null;
+		DAO.begin();
 		
 		if(!isEditarCadastrado) {
-			
 			/*
 			 * Esta parte do IF realiza o cadastramento de um novo animal
-			 */
-			
-			DAO.begin();
-			
+			 */	
 			endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
 			proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
 			animal = new Animal(nomePet, tipo, idade, cor, proprietario);
 			proprietario.addAnimal(animal);
 			animalDao.persist(animal);
 			proprietarioDao.persist(proprietario);		
-
-			if(usuarioLogado.getTipo()==0) {
-				/*
-				 * define o professor como responsavel, e o membro e um aluno e,
-				 * como foi o professor quem cadastrou, ja aprova o prontuario
-				 * imediatamente.
-				 */
-				prontuario = new Prontuario(animal, dataRetorno, dataAtendimento, usuarioLogado, membro, true, motivo, prescricoes);
-			} else {
-				/*
-				 * define o aluno como responsavel, e o membro e um professor e,
-				 * como foi o aluno quem cadastrou, coloca o prontuario ainda como
-				 * nao-aprovado
-				 */
-				prontuario = new Prontuario(animal, dataRetorno, dataAtendimento, membro, usuarioLogado, false, motivo, prescricoes);
-			}
-			
-			prontuarioDao.persist(prontuario);
-			DAO.commit();
 		} else {
 			/*
 			 * Esta parte do IF realiza o cadastramento do prontuario, mas
 			 * para um animal que ja exista.
-			 */
-			
+			 */		
 			int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
 			animal = animalDao.findById(idAnimal);
-			// agora, preciso ver como fazer a parte do mudar o dono antes de continuar...
+			boolean isProprietarioEditado = Boolean.parseBoolean(request.getParameter("isProprietarioEditado"));
+			
+			if(isProprietarioEditado) {
+				proprietario = proprietarioDao.findById(animal.getProprietario().getId());
+				endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
+				proprietario.setCpf(cpf);
+				proprietario.setNome(nomeDono);
+				proprietario.setEndereco(endereco);
+				
+				animal.setProprietario(proprietario);
+			}
+			
+			animal.setCor(cor);
+			animal.setTipo(tipo);
+			animal.setIdade(idade);
+			animal.setNome(nomePet);
 		}
+		
+		if(usuarioLogado.getTipo()==0) {
+			/*
+			 * define o professor como responsavel, e o membro e um aluno e,
+			 * como foi o professor quem cadastrou, ja aprova o prontuario
+			 * imediatamente.
+			 */
+			prontuario = new Prontuario(animal, dataRetorno, dataAtendimento, usuarioLogado, membro, true, motivo, prescricoes);
+		} else {
+			/*
+			 * define o aluno como responsavel, e o membro e um professor e,
+			 * como foi o aluno quem cadastrou, coloca o prontuario ainda como
+			 * nao-aprovado
+			 */
+			prontuario = new Prontuario(animal, dataRetorno, dataAtendimento, membro, usuarioLogado, false, motivo, prescricoes);
+		}
+		
+		prontuarioDao.persist(prontuario);
+		DAO.commit();
 		
 		response.sendRedirect(request.getContextPath() + "/main/home.jsp");
 		return;

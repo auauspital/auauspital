@@ -62,4 +62,9 @@ public class Proprietario extends Pessoa {
 	public void setAnimais (ArrayList<Animal> animais) {
 		this.animais = animais;
 	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+		
+	}
 }

@@ -23,6 +23,15 @@
     <!--===============================================================================================-->
     <script src="/auauspital/src/js/verificação.js"></script>
     <!--===============================================================================================-->
+    <script type="text/javascript">
+    	$(document).ready(function() {
+    		$("#btn-editarProprietario").click(function() {
+    			$("#proprietarioEditadoControle").attr("value", "true");
+    			$("#box-dadosDono").css("display", "none");
+    			$("#box-dadosEndereco").css("display", "block");
+    		});
+    	});
+    </script>
   </head>
 
   <body>
@@ -57,6 +66,7 @@
           		<c:when test="${not empty isEditarCadastro}">
           			<input type="hidden" name="isEditarCadastrado" value="true" />
           			<input type="hidden" name="idAnimal" value="<c:out value="${animal.idAnimal}" />" />
+          			<input type="hidden" id="proprietarioEditadoControle" name="isProprietarioEditado" value="false" />
           		</c:when>
           		<c:otherwise>
           			<input type="hidden" name="isEditarCadastrado" value="false" />
@@ -99,886 +109,949 @@
 
               </div>
             </div>
-
-            <div class="form-group">
-              <!--Nome do(a) dono(a) -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Nome do(a) dono(a):</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="nomeDono" value="<c:out value="${animal.proprietario.nome}" />">
-
-              </div>
-            </div>
             
-			<div class="form-group">
-              <!-- CPF -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">CPF:</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="cpf" value="<c:out value="${animal.proprietario.cpf}" />">
-
-              </div>
-            </div>
-
-            <div class="form-group">
-              <!-- Rua -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Logradouro:</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="logradouro" value="<c:out value="${animal.proprietario.endereco.logradouro}" />">
-
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <!-- Complemento -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Complemento:</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="complemento" value="<c:out value="${animal.proprietario.endereco.complemento}" />">
-
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <!-- Cidade -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Cidade:</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="cidade" value="<c:out value="${animal.proprietario.endereco.cidade}" />">
-
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <!-- UF -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">UF:</label>
-              <div class="col-sm-9">          
-				<select class="form-control" id="full_name_id" name="uf">
-					<c:choose>
-						<c:when test="${animal.proprietario.endereco.uf eq 'AC' }">
-							<option value="AC" selected="selected">Acre</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'AL' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL" selected="selected">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'AP' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP" selected="selected">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'AM' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM" selected="selected">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'BA' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA" selected="selected">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'CE' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE" selected="selected">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'DF' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF" selected="selected">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'ES' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES" selected="selected">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'GO' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO" selected="selected">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'MA' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA" selected="selected">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'MT' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT" selected="selected">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'MS' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS" selected="selected">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'MG' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG" selected="selected">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>					
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'PA' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA" selected="selected">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'PB' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB" selected="selected">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'PR' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR" selected="selected">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'PE' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE" selected="selected">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'PI' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI" selected="selected">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'RJ' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ" selected="selected">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'RN' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN" selected="selected">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'RS' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS" selected="selected">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'RO' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO" selected="selected">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'RR' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR" selected="selected">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'SC' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC" selected="selected">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'SP' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP" selected="selected">São Paulo</option>
-							<option value="SE">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'AC' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-							<option value="SE" selected="selected">Sergipe</option>
-							<option value="TO">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'AC' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-						    <option value="SE">Sergipe</option>
-							<option value="TO" selected="selected">Tocantins</option>
-							<option value="ET">Estrangeiro</option>
-						</c:when>
-						<c:when test="${animal.proprietario.endereco.uf eq 'AC' }">
-						    <option value="AC">Acre</option>
-						    <option value="AL">Alagoas</option>
-						    <option value="AP">Amapá</option>
-						    <option value="AM">Amazonas</option>
-						    <option value="BA">Bahia</option>
-						    <option value="CE">Ceará</option>
-						    <option value="DF">Distrito Federal</option>
-						    <option value="ES">Espírito Santo</option>
-						    <option value="GO">Goiás</option>
-						    <option value="MA">Maranhão</option>
-						    <option value="MT">Mato Grosso</option>
-						    <option value="MS">Mato Grosso do Sul</option>
-						    <option value="MG">Minas Gerais</option>
-						    <option value="PA">Pará</option>
-						    <option value="PB">Paraíba</option>
-						    <option value="PR">Paraná</option>
-						    <option value="PE">Pernambuco</option>
-						    <option value="PI">Piauí</option>
-						    <option value="RJ">Rio de Janeiro</option>
-						    <option value="RN">Rio Grande do Norte</option>
-						    <option value="RS">Rio Grande do Sul</option>
-						    <option value="RO">Rondônia</option>
-						    <option value="RR">Roraima</option>
-						    <option value="SC">Santa Catarina</option>
-						    <option value="SP">São Paulo</option>
-						    <option value="SE">Sergipe</option>
-						    <option value="TO">Tocantins</option>
-							<option value="ET" selected="selected">Estrangeiro</option>
-						</c:when>
-					</c:choose>
-
-				</select>
-
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <!-- CEP -->
-              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">CEP:</label>
-              <div class="col-sm-9">
-                <input type="text" class="form-control" id="full_name_id" name="cep"  value="<c:out value="${animal.proprietario.endereco.cep}" />">
-
-              </div>
-            </div>
+            	<c:if test="${not empty isEditarCadastro}">
+            		<%--
+            			se for para editar algo ja cadastrado, ele vai deixar os campos
+            			com os valores do dono antigo, mas os deixara ocultos, e serao
+            			enviados
+            		 --%>
+            		 <div id="box-dadosDono">
+	            		 <div class="form-group">
+	            		 	<!-- Dados do dono para serem apenas aceitos -->
+	            		 	<label for="full_name_id" class="control-label col-sm-3" id="prontuario">Dono:</label>
+	            		 	<div class="col-sm-9">
+	            		 		<input type="text" class="form-control" id="full_name_id" name="dadosDono" disabled="disabled" value="<c:out value="${animal.proprietario.nome}" /> (CPF: <c:out value="${animal.proprietario.cpf}" />)" />
+	            		 		
+	            		 	</div>
+	            		 </div>
+	            		 
+	            		 <div class="form-group">
+	            		 	<!-- Dados do dono para serem apenas aceitos -->
+	            		 	<label for="full_name_id" class="control-label col-sm-3" id="prontuario"></label>
+	            		 	<div class="col-sm-9">
+	            		 		<button class="btn-cadastro" id="btn-editarProprietario" type="button"><span class="glyphicon glyphicon-pencil"></span> Editar dados do dono</button> <button class="btn-cadastro" type="button"><span class="glyphicon glyphicon-plus"></span> Cadastrar novo dono</button>
+	            		 		
+	            		 		
+	            		 	</div>
+	            		 </div>
+	            	 </div>
+            	</c:if>
+            	<c:if test="${not empty isEditarCadastro}">
+            		<div id="box-dadosEndereco" style="display:none;">
+            	</c:if>
+            		<%-- se nao for para editar algo ja cadastrado, ele simplesmente vai
+ 						 mostrar, abaixo, os campos vazios normalmente, para serem preenchidos           		
+            		 --%>
+					<div class="form-group">
+		              <!--Nome do(a) dono(a) -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Nome do(a) dono(a):</label>
+		              <div class="col-sm-9">
+		                <input type="text" class="form-control" id="full_name_id" name="nomeDono" value="<c:out value="${animal.proprietario.nome}" />">
+						
+		              </div>
+		            </div>
+		            
+					<div class="form-group">
+		              <!-- CPF -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">CPF:</label>
+		              <div class="col-sm-9">
+		                <input type="text" class="form-control" id="full_name_id" name="cpf" value="<c:out value="${animal.proprietario.cpf}" />">
+		
+		              </div>
+		            </div>
+		
+		            <div class="form-group">
+		              <!-- Rua -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Logradouro:</label>
+		              <div class="col-sm-9">
+		                <input type="text" class="form-control" id="full_name_id" name="logradouro" value="<c:out value="${animal.proprietario.endereco.logradouro}" />">
+		
+		              </div>
+		            </div>
+		            
+		            <div class="form-group">
+		              <!-- Complemento -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Complemento:</label>
+		              <div class="col-sm-9">
+		                <input type="text" class="form-control" id="full_name_id" name="complemento" value="<c:out value="${animal.proprietario.endereco.complemento}" />">
+		
+		              </div>
+		            </div>
+		            
+		            <div class="form-group">
+		              <!-- Cidade -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Cidade:</label>
+		              <div class="col-sm-9">
+		                <input type="text" class="form-control" id="full_name_id" name="cidade" value="<c:out value="${animal.proprietario.endereco.cidade}" />">
+		
+		              </div>
+		            </div>
+		            
+		            <div class="form-group">
+		              <!-- UF -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">UF:</label>
+		              <div class="col-sm-9">          
+						<select class="form-control" id="full_name_id" name="uf">
+							<c:choose>
+								<c:when test="${animal.proprietario.endereco.uf eq 'AC' }">
+									<option value="AC" selected="selected">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'AL' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL" selected="selected">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'AP' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP" selected="selected">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'AM' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM" selected="selected">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'BA' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA" selected="selected">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'CE' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE" selected="selected">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'DF' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF" selected="selected">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'ES' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES" selected="selected">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'GO' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO" selected="selected">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'MA' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA" selected="selected">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'MT' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT" selected="selected">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'MS' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS" selected="selected">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'MG' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG" selected="selected">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>					
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'PA' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA" selected="selected">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'PB' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB" selected="selected">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'PR' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR" selected="selected">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'PE' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE" selected="selected">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'PI' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI" selected="selected">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'RJ' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ" selected="selected">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'RN' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN" selected="selected">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'RS' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS" selected="selected">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'RO' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO" selected="selected">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'RR' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR" selected="selected">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'SC' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC" selected="selected">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'SP' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP" selected="selected">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'SE' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE" selected="selected">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'TO' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+								    <option value="SE">Sergipe</option>
+									<option value="TO" selected="selected">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:when>
+								<c:when test="${animal.proprietario.endereco.uf eq 'ET' }">
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+								    <option value="SE">Sergipe</option>
+								    <option value="TO">Tocantins</option>
+									<option value="ET" selected="selected">Estrangeiro</option>
+								</c:when>
+							</c:choose>
+		
+						</select>
+		
+		              </div>
+		            </div>
+		            
+		            <div class="form-group">
+		              <!-- CEP -->
+		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">CEP:</label>
+		              <div class="col-sm-9">
+		                <input type="text" class="form-control" id="full_name_id" name="cep"  value="<c:out value="${animal.proprietario.endereco.cep}" />">
+		
+		              </div>
+		            </div>            	
+          		<c:if test="${not empty isEditarCadastro}">
+            		</div>
+            	</c:if>
             
             <c:choose>
             	<c:when test="${usuario.tipo==0}">

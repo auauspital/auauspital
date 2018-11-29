@@ -633,3 +633,20 @@ Na página de atendimento fiz dois conjuntos de colunas, uma no topo da outra:
 .msg-erro{
   color: red;
 }
+
+/* ----- caio ----- */
+
+button.btn-cadastro {
+	background-color: #FFAB00;
+  	color: #FFF;
+  	font: 15px avenir;
+  	border-radius: 2px !important;
+  	border: solid 2px;
+  	border-color: #707070;
+	padding:3px;  	
+}
+
+button span.glyphicon {
+	padding:0 !important;
+	color:#fff;
+}
