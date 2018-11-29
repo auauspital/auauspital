@@ -646,6 +646,39 @@ button.btn-cadastro {
 	padding:3px;  	
 }
 
+.ui-widget-content {
+	background:#fff !important;
+}
+
+.ui-dialog-titlebar {
+	background-color:#ffab00;
+	text-align:center;
+}
+
+.ui-dialog-buttonpane {
+	text-align:center !important;
+	padding:2.5px !important;
+}
+
+.ui-dialog-buttonset {
+	float:none !important;
+}
+
+.ui-button {
+	background-color: #FFAB00;
+	color: #FFF;
+  	font: 15px avenir;
+  	border-radius: 2px !important;
+  	border: solid 2px;
+  	border-color: #707070;
+}
+
+#dialog-NovoDono p {
+	font:15px avenir;
+	text-align:justify;
+	padding-top:20px;
+}
+
 button span.glyphicon {
 	padding:0 !important;
 	color:#fff;

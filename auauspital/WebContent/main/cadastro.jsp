@@ -15,6 +15,8 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/auauspital/src/css/estilo.css">
     <!--===============================================================================================-->
+    <link rel="stylesheet" href="/auauspital/src/css/jquery-ui.min.css" />
+    <!--===============================================================================================-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--===============================================================================================-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -23,18 +25,51 @@
     <!--===============================================================================================-->
     <script src="/auauspital/src/js/verificação.js"></script>
     <!--===============================================================================================-->
+    <script src="/auauspital/src/js/jquery-ui.min.js"></script>
+    <!--===============================================================================================-->
     <script type="text/javascript">
     	$(document).ready(function() {
     		$("#btn-editarProprietario").click(function() {
     			$("#proprietarioEditadoControle").attr("value", "true");
+    			$("#proprietarioNovoCadastrado").attr("value", "false");
     			$("#box-dadosDono").css("display", "none");
     			$("#box-dadosEndereco").css("display", "block");
     		});
+    		
+    		$("#btn-trocarProprietario").click(function() {
+    			$("#dialog-NovoDono").dialog({
+        			modal: true,
+        			buttons: {
+        				"Cadastrar": function() {
+        					$('input[name=nomeDono]').val("");
+        					$('input[name=cpf]').val("");
+        					$('input[name=logradouro]').val("");
+        					$('input[name=complemento]').val("");
+        					$('input[name=cidade]').val("");
+        					$('input[name=cep]').val("");
+        					
+        					$("#box-dadosEndereco").css("display", "block");
+        					$("#box-dadosDono").css("display", "none");
+        					$("#proprietarioNovoCadastrado").attr("value", "true");
+        					$("#proprietarioEditadoControle").attr("value", "false");
+        					
+        					$(this).dialog("close");
+        				},
+        				"Associar": function() {
+        					$(this).dialog("close");
+        				}
+        			}
+        		});
+    		});
+    		
     	});
     </script>
   </head>
 
   <body>
+   <div style="display:none;" id="dialog-NovoDono" title="Novo Dono">
+  	 <p>Você deseja cadastrar um novo dono, ou deseja associar um proprietário já existente a esse animal?</p>
+   </div>
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -67,6 +102,7 @@
           			<input type="hidden" name="isEditarCadastrado" value="true" />
           			<input type="hidden" name="idAnimal" value="<c:out value="${animal.idAnimal}" />" />
           			<input type="hidden" id="proprietarioEditadoControle" name="isProprietarioEditado" value="false" />
+          			<input type="hidden" id="proprietarioNovoCadastrado" name="isProprietarioNovoCadastrado" value="false" />
           		</c:when>
           		<c:otherwise>
           			<input type="hidden" name="isEditarCadastrado" value="false" />
@@ -112,9 +148,7 @@
             
             	<c:if test="${not empty isEditarCadastro}">
             		<%--
-            			se for para editar algo ja cadastrado, ele vai deixar os campos
-            			com os valores do dono antigo, mas os deixara ocultos, e serao
-            			enviados
+            			se for para editar algo ja cadastrado
             		 --%>
             		 <div id="box-dadosDono">
 	            		 <div class="form-group">
@@ -127,10 +161,10 @@
 	            		 </div>
 	            		 
 	            		 <div class="form-group">
-	            		 	<!-- Dados do dono para serem apenas aceitos -->
+	            		 	<!-- Botoes para edicao ou troca de dono -->
 	            		 	<label for="full_name_id" class="control-label col-sm-3" id="prontuario"></label>
 	            		 	<div class="col-sm-9">
-	            		 		<button class="btn-cadastro" id="btn-editarProprietario" type="button"><span class="glyphicon glyphicon-pencil"></span> Editar dados do dono</button> <button class="btn-cadastro" type="button"><span class="glyphicon glyphicon-plus"></span> Cadastrar novo dono</button>
+	            		 		<button class="btn-cadastro" id="btn-editarProprietario" type="button"><span class="glyphicon glyphicon-pencil"></span> Editar dados do dono</button> <button class="btn-cadastro" id="btn-trocarProprietario" type="button"><span class="glyphicon glyphicon-plus"></span> Novo dono</button>
 	            		 		
 	            		 		
 	            		 	</div>

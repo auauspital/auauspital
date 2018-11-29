@@ -105,6 +105,7 @@ public class CadastraAnimal extends HttpServlet {
 			int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
 			animal = animalDao.findById(idAnimal);
 			boolean isProprietarioEditado = Boolean.parseBoolean(request.getParameter("isProprietarioEditado"));
+			boolean isProprietarioNovoCadastrado = Boolean.parseBoolean(request.getParameter("isProprietarioNovoCadastrado"));
 			
 			if(isProprietarioEditado) {
 				proprietario = proprietarioDao.findById(animal.getProprietario().getId());
@@ -112,10 +113,15 @@ public class CadastraAnimal extends HttpServlet {
 				proprietario.setCpf(cpf);
 				proprietario.setNome(nomeDono);
 				proprietario.setEndereco(endereco);
-				
-				animal.setProprietario(proprietario);
 			}
 			
+			if(isProprietarioNovoCadastrado) {
+				endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
+				proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
+				proprietarioDao.persist(proprietario);
+			}
+			
+			animal.setProprietario(proprietario);
 			animal.setCor(cor);
 			animal.setTipo(tipo);
 			animal.setIdade(idade);
