@@ -55,7 +55,11 @@ public class LoadTelaCadastro extends HttpServlet {
 			byte tipo = (byte)((usuarioLogado.getTipo()==1) ? (0) : (1));
 			List<Usuario> membros = usuarioDao.findByTipo(tipo);
 			
+			ProprietarioDao proprietarioDao = new ProprietarioDao();
+			ArrayList<Proprietario> proprietarios = (ArrayList<Proprietario>)proprietarioDao.findAll();
+			
 			request.setAttribute("membrosCadastro", membros);
+			request.setAttribute("proprietarios", proprietarios);
 			RequestDispatcher rd = request.getRequestDispatcher("/main/cadastro.jsp");
 			rd.forward(request, response);
 			return;

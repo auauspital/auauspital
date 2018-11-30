@@ -114,8 +114,17 @@
         </div>
         <br>
         <div id="exibição">
-          <h3>Prontuários</h3>
-          <p>Clique em um dos prontuários da lista acima para visualizá-lo aqui.</p>
+          <c:choose>
+          	<c:when test="${not empty prontuarios}">
+          		<h3>Prontuários</h3>
+          		<p>Clique em um dos prontuários da lista acima para visualizá-lo aqui.</p>
+          	</c:when>
+          	<c:otherwise>
+          		<h3>Prontuários</h3>
+          		<p>Não há prontuários pendentes de autorização.</p>
+          	</c:otherwise>	
+          </c:choose>
+          
         </div>
 
 

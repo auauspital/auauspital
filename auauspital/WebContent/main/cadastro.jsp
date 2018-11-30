@@ -30,6 +30,15 @@
     <script type="text/javascript">
     	$(document).ready(function() {
 
+        	var isEditar = <c:out value="${not empty isEditarCadastro}" />;
+
+            if(!isEditar) {
+				$("#btn-editarProprietario").css("display", "none");
+				$('input[name=dadosDono]').val("");
+				$('input[name=dadosDono]').attr("placeholder", "Digite aqui o CPF do proprietário desejado...");
+				$('#linha-dadosDono').css("display", "none");
+            }
+
     		var proprietarios = [
 				<c:forEach items="${proprietarios}" var="proprietario">
 					{
@@ -69,6 +78,7 @@
         				},
         				"Associar": function() {
 
+        					$('#linha-dadosDono').css("display", "block");
         					$('input[name=dadosDono]').removeAttr("disabled");
             				$('#botoesControle').css("display", "none");
 							$('#proprietarioNovoAssociado').attr("value", "true");
@@ -182,12 +192,8 @@
               </div>
             </div>
             
-            	<c:if test="${not empty isEditarCadastro}">
-            		<%--
-            			se for para editar algo ja cadastrado
-            		 --%>
             		 <div id="box-dadosDono">
-	            		 <div class="form-group">
+	            		 <div class="form-group" id="linha-dadosDono">
 	            		 	<!-- Dados do dono para serem apenas aceitos -->
 	            		 	<label for="full_name_id" class="control-label col-sm-3" id="prontuario">Dono:</label>
 	            		 	<div class="col-sm-9">
@@ -206,13 +212,8 @@
 	            		 	</div>
 	            		 </div>
 	            	 </div>
-            	</c:if>
-            	<c:if test="${not empty isEditarCadastro}">
-            		<div id="box-dadosEndereco" style="display:none;">
-            	</c:if>
-            		<%-- se nao for para editar algo ja cadastrado, ele simplesmente vai
- 						 mostrar, abaixo, os campos vazios normalmente, para serem preenchidos           		
-            		 --%>
+            	
+            	<div id="box-dadosEndereco" style="display:none;">
 					<div class="form-group">
 		              <!--Nome do(a) dono(a) -->
 		              <label for="full_name_id" class="control-label col-sm-3" id="prontuario">Nome do(a) dono(a):</label>
@@ -804,36 +805,6 @@
 									<option value="TO">Tocantins</option>
 									<option value="ET">Estrangeiro</option>
 								</c:when>
-								<c:when test="${animal.proprietario.endereco.uf eq 'RJ' }">
-								    <option value="AC">Acre</option>
-								    <option value="AL">Alagoas</option>
-								    <option value="AP">Amapá</option>
-								    <option value="AM">Amazonas</option>
-								    <option value="BA">Bahia</option>
-								    <option value="CE">Ceará</option>
-								    <option value="DF">Distrito Federal</option>
-								    <option value="ES">Espírito Santo</option>
-								    <option value="GO">Goiás</option>
-								    <option value="MA">Maranhão</option>
-								    <option value="MT">Mato Grosso</option>
-								    <option value="MS">Mato Grosso do Sul</option>
-								    <option value="MG">Minas Gerais</option>
-								    <option value="PA">Pará</option>
-								    <option value="PB">Paraíba</option>
-								    <option value="PR">Paraná</option>
-								    <option value="PE">Pernambuco</option>
-								    <option value="PI">Piauí</option>
-								    <option value="RJ" selected="selected">Rio de Janeiro</option>
-								    <option value="RN">Rio Grande do Norte</option>
-								    <option value="RS">Rio Grande do Sul</option>
-								    <option value="RO">Rondônia</option>
-								    <option value="RR">Roraima</option>
-								    <option value="SC">Santa Catarina</option>
-								    <option value="SP">São Paulo</option>
-									<option value="SE">Sergipe</option>
-									<option value="TO">Tocantins</option>
-									<option value="ET">Estrangeiro</option>
-								</c:when>
 								<c:when test="${animal.proprietario.endereco.uf eq 'RN' }">
 								    <option value="AC">Acre</option>
 								    <option value="AL">Alagoas</option>
@@ -1104,6 +1075,36 @@
 								    <option value="TO">Tocantins</option>
 									<option value="ET" selected="selected">Estrangeiro</option>
 								</c:when>
+								<c:otherwise>
+								    <option value="AC">Acre</option>
+								    <option value="AL">Alagoas</option>
+								    <option value="AP">Amapá</option>
+								    <option value="AM">Amazonas</option>
+								    <option value="BA">Bahia</option>
+								    <option value="CE">Ceará</option>
+								    <option value="DF">Distrito Federal</option>
+								    <option value="ES">Espírito Santo</option>
+								    <option value="GO">Goiás</option>
+								    <option value="MA">Maranhão</option>
+								    <option value="MT">Mato Grosso</option>
+								    <option value="MS">Mato Grosso do Sul</option>
+								    <option value="MG">Minas Gerais</option>
+								    <option value="PA">Pará</option>
+								    <option value="PB">Paraíba</option>
+								    <option value="PR">Paraná</option>
+								    <option value="PE">Pernambuco</option>
+								    <option value="PI">Piauí</option>
+								    <option value="RJ" selected="selected">Rio de Janeiro</option>
+								    <option value="RN">Rio Grande do Norte</option>
+								    <option value="RS">Rio Grande do Sul</option>
+								    <option value="RO">Rondônia</option>
+								    <option value="RR">Roraima</option>
+								    <option value="SC">Santa Catarina</option>
+								    <option value="SP">São Paulo</option>
+									<option value="SE">Sergipe</option>
+									<option value="TO">Tocantins</option>
+									<option value="ET">Estrangeiro</option>
+								</c:otherwise>
 							</c:choose>
 		
 						</select>
@@ -1119,9 +1120,9 @@
 		
 		              </div>
 		            </div>            	
-          		<c:if test="${not empty isEditarCadastro}">
-            		</div>
-            	</c:if>
+          		
+            	</div>
+            	
             
             <c:choose>
             	<c:when test="${usuario.tipo==0}">
