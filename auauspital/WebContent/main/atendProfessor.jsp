@@ -52,66 +52,36 @@
 
 
 			<div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
-			<table class="table table-bordered table-hover"style="font: 13px avenirLight !important;color: #707070 !important; height:255px!important;"> <!--Criando a tabela-->
+			<c:choose>
+				<c:when test="${not empty prontuarios}">
+				<table class="table table-bordered table-hover"style="font: 13px avenirLight !important;color: #707070 !important; height:255px!important;"> <!--Criando a tabela-->
 				<thead class="thead-light">  <!-- Estrutura/cabeçalho da tabela, "primeira linha" -->
 				<tr style="font: 13px avenir !important;color: #707070 !important;">
+						<th>Professor(a) responsável</th>
 						<th>Nome</th>
 						<th>Tipo de animal</th>
 						<th>Data de atendimento</th>
 						<th>Aluno(a) responsável</th>
 					</tr>
-
 				</thead> <!-- fim da estrutura/cabeçalho da tabela -->
 				<tbody> <!-- Começo da parte com dados da tabela-->
-
-					<tr> <!-- Aqui provavelmente entrar um forech das linha da tabela, não sei como escreve-->
-						<td>Christopher</td> <!-- Aqui provavelmente entra o forech dos ""nomes""-->
-						<td>Arara-Azul</td> <!-- Aqui provavelmente entra o forech dos ""Tipo de animal""-->
-						<td>15/06/18</td> <!-- Aqui provavelmente entra o forech dos ""Data de atendimento""-->
-						<td>Caio</td> <!-- Aqui provavelmente entra o forech dos ""Aluno(a) responsavel""-->
-					</tr>
-
-
-																									<!--Aqui sera retirado-->
-
-									<!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-					<tr>
-						<td>Christopher</td>
-						<td>Arara-Azul</td>
-						<td>15/06/18</td>
-						<td>Caio</td>
-					</tr>
-								 <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-					<tr>
-						<td>Christopher</td>
-						<td>Arara-Azul</td>
-						<td>15/06/18</td>
-						<td>Caio</td>
-					</tr>
-								<!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-					<tr>
-						<td>Christopher</td>
-						<td>Arara-Azul</td>
-						<td>15/06/18</td>
-						<td>Caio</td>
-					</tr>
-								<!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-					<tr>
-						<td>Christopher</td>
-						<td>Arara-Azul</td>
-						<td>15/06/18</td>
-						<td>Caio</td>
-					</tr>
-								<!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-					<tr>
-						<td>Christopher</td>
-						<td>Arara-Azul</td>
-						<td>15/06/18</td>
-						<td>Caio</td>
-					</tr>
-											<!--Retirado até aqui, fé-->
+					<c:forEach items="${prontuarios}" var="prontuario"> 
+						<tr>
+						<td><c:out value="${prontuario.professorResponsavel.nome}" /></td>
+						<td><c:out value="${prontuario.animal.nome}" /></td>
+						<td><c:out value="${prontuario.animal.tipo}" /></td>
+						<td><c:out value="${prontuario.dataAtendimento}" /></td>
+						<td><c:out value="${prontuario.aluno.nome}" /></td>
+						</tr>
+					</c:forEach>
 				</tbody>
-			</table>
+				</table>
+				</c:when>
+				<c:otherwise>
+					<p>Não há prontuários cadastrados no sistema.</p>
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 
 		</div>

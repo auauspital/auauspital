@@ -8,7 +8,7 @@ public class Endereco {
 	
 	@Column(nullable=false)
 	private String logradouro;
-	@Column(length=11, nullable=false)
+	@Column(length=8, nullable=false)
 	private String cep;
 	@Column(length=2, nullable=false)
 	private String uf;

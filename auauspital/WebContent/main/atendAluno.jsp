@@ -36,110 +36,59 @@
     <h4>Atendimentos por alunos</h4>
   </div>
 
-<div class="push"style="height:20px;"></div>
+  <div class="push"style="height:20px;"></div>
   <div class="row">
-    <div class="column4"></div>
+    <div class="column4">
+      <div class="square2">
 
-
-    <div class="column3" >
-
-      <div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
-      <table class="table table-bordered table-hover "> <!--Criando a tabela-->
-        <thead class="thead-light" style="font: 13px avenir !important;color: #707070 !important;">  <!-- Estrutura/cabeçalho da tabela, "primeira linha" da tabela -->
-          <tr>
-            <th>Nome</th>
-            <th>Tipo de animal</th>
-            <th>Data de atendimento</th>
-            <th>Aluno(a) responsavel</th>
-          </tr>
-        </thead> <!-- fim da estrutura/cabeçalho da tabela -->
-        <tbody style="font: 13px avenirLight !important;color: #707070 !important;"> <!-- Começo da parte com dados da tabela-->
-
-          <tr> <!-- Aqui provavelmente entrar um forech das linha da tabela, não sei como escreve-->
-            <td>John</td> <!-- Aqui provavelmente entra o forech dos ""nomes""-->
-            <td>Sapo</td> <!-- Aqui provavelmente entra o forech dos ""Tipo de animal""-->
-            <td>25/12/18</td> <!-- Aqui provavelmente entra o forech dos ""Data de atendimento""-->
-            <td>Thiago</td> <!-- Aqui provavelmente entra o forech dos ""Professor(a) responsavel""-->
-          </tr>
-
-
-                                                  <!--Aqui sera retirado-->
-
-                  <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>John</td>
-            <td>Sapo</td>
-            <td>25/12/18</td>
-            <td>Thiago</td>
-          </tr>
-                 <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>John</td>
-            <td>Sapo</td>
-            <td>25/12/18</td>
-            <td>Thiago</td>
-          </tr>
-                <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>John</td>
-            <td>Sapo</td>
-            <td>25/12/18</td>
-            <td>Thiago</td>
-          </tr>
-                <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>John</td>
-            <td>Sapo</td>
-            <td>25/12/18</td>
-            <td>Thiago</td>
-          </tr>
-                <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>John</td>
-            <td>Sapo</td>
-            <td>25/12/18</td>
-            <td>Thiago</td>
-          </tr>
-
-          <tr>
-            <td>John</td>
-            <td>Sapo</td>
-            <td>25/12/18</td>
-            <td>Thiago</td>
-          </tr>
-                <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>John</td>
-            <td>Sapo</td>
-            <td>25/12/18</td>
-            <td>Thiago</td>
-          </tr>
-                <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>John</td>
-            <td>Sapo</td>
-            <td>25/12/18</td>
-            <td>Thiago</td>
-          </tr>
-                      <!--Retirado até aqui, fé-->
-        </tbody>
-      </table>
-
-
-
-
+      <img class="imagemCardio" src="/auauspital/src/imagens/icones/cardiogram.png">
     </div>
-    <div class="imagemPeixinho">
-    <img src="/auauspital/src/imagens/icones/fish-bowl.png" alt="gatinho" width=150 >
-  </div>
-    <div class="push"></div>
+		</div> <!-- fim do segundo div "row"-->
 
 
-  </div>
 
 
-    <div class="column4" ></div>
+    <div class="column3">
 
+
+			<div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
+			<c:choose>
+				<c:when test="${not empty prontuarios}">
+				<table class="table table-bordered table-hover"style="font: 13px avenirLight !important;color: #707070 !important; height:255px!important;"> <!--Criando a tabela-->
+				<thead class="thead-light">  <!-- Estrutura/cabeçalho da tabela, "primeira linha" -->
+				<tr style="font: 13px avenir !important;color: #707070 !important;">
+						<th>Aluno(a) responsável</th>
+						<th>Nome</th>
+						<th>Tipo de animal</th>
+						<th>Data de atendimento</th>
+						<th>Professor(a) responsável</th>
+					</tr>
+				</thead> <!-- fim da estrutura/cabeçalho da tabela -->
+				<tbody> <!-- Começo da parte com dados da tabela-->
+					<c:forEach items="${prontuarios}" var="prontuario"> 
+						<tr>
+						<td><c:out value="${prontuario.aluno.nome}" /></td>
+						<td><c:out value="${prontuario.animal.nome}" /></td>
+						<td><c:out value="${prontuario.animal.tipo}" /></td>
+						<td><c:out value="${prontuario.dataAtendimento}" /></td>
+						<td><c:out value="${prontuario.professorResponsavel.nome}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				</table>
+				</c:when>
+				<c:otherwise>
+					<p>Não há prontuários cadastrados no sistema.</p>
+				</c:otherwise>
+			</c:choose>
+
+		</div>
+
+		</div>
+
+
+    <div class="column4"></div>
+</div>
 
   <div class="push"></div>
 

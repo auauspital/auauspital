@@ -41,6 +41,7 @@ public class CadastraAnimal extends HttpServlet {
 		String cep = request.getParameter("cep");
 		Endereco endereco = null;
 		
+		int idProprietario = Integer.parseInt(request.getParameter("idProprietario"));
 		String nomeDono = request.getParameter("nomeDono");
 		String cpf = request.getParameter("cpf");
 		Proprietario proprietario = null;
@@ -85,56 +86,41 @@ public class CadastraAnimal extends HttpServlet {
 		}
 		
 		Prontuario prontuario = null;
+		
+		boolean isProprietarioEditado = Boolean.parseBoolean(request.getParameter("isProprietarioEditado"));
+		boolean isProprietarioNovoCadastrado = Boolean.parseBoolean(request.getParameter("isProprietarioNovoCadastrado"));
+		boolean isProprietarioNovoAssociado = Boolean.parseBoolean(request.getParameter("isProprietarioNovoAssociado"));
+		endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
+		
 		DAO.begin();
 		
-		if(!isEditarCadastrado) {
-			/*
-			 * Esta parte do IF realiza o cadastramento de um novo animal
-			 */	
-			boolean isProprietarioNovoAssociado = Boolean.parseBoolean(request.getParameter("isProprietarioNovoAssociado"));
-			endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
-			if(isProprietarioNovoAssociado) {
-				int idProprietario = Integer.parseInt(request.getParameter("idProprietario"));
-				proprietario = proprietarioDao.findById(idProprietario);
-				animal = new Animal(nomePet, tipo, idade, cor, proprietario);
-				proprietario.addAnimal(animal);
-				animalDao.persist(animal);
-			} else {
-				proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
-				animal = new Animal(nomePet, tipo, idade, cor, proprietario);
-				proprietario.addAnimal(animal);
-				proprietarioDao.persist(proprietario);	
-				animalDao.persist(animal);
-			}
+		if(isProprietarioEditado) {
+			proprietario = proprietarioDao.findById(idProprietario);
+			proprietario.setCpf(cpf);
+			proprietario.setNome(nomeDono);
+			proprietario.setEndereco(endereco);
+		}
+		
+		if(isProprietarioNovoCadastrado) {
+			proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
+			proprietarioDao.persist(proprietario);
+		}
+		
+		if(isProprietarioNovoAssociado) {
+			proprietario = proprietarioDao.findById(idProprietario);
+		}
+		
+		/*
+		 * Esta parte do IF realiza o cadastramento de um novo animal,
+		 * senao, o else ativa para um animal que ja exista (operacao
+		 * de update)
+		 */		
+		if(!isEditarCadastrado) {		
+			animal = new Animal(nomePet, tipo, idade, cor, proprietario);
+			animalDao.persist(animal);
 		} else {
-			/*
-			 * Esta parte do IF realiza o cadastramento do prontuario, mas
-			 * para um animal que ja exista.
-			 */		
 			int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
 			animal = animalDao.findById(idAnimal);
-			boolean isProprietarioEditado = Boolean.parseBoolean(request.getParameter("isProprietarioEditado"));
-			boolean isProprietarioNovoCadastrado = Boolean.parseBoolean(request.getParameter("isProprietarioNovoCadastrado"));
-			boolean isProprietarioNovoAssociado = Boolean.parseBoolean(request.getParameter("isProprietarioNovoAssociado"));
-			
-			if(isProprietarioEditado) {
-				proprietario = proprietarioDao.findById(animal.getProprietario().getId());
-				endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
-				proprietario.setCpf(cpf);
-				proprietario.setNome(nomeDono);
-				proprietario.setEndereco(endereco);
-			}
-			
-			if(isProprietarioNovoCadastrado) {
-				endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
-				proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
-				proprietarioDao.persist(proprietario);
-			}
-			
-			if(isProprietarioNovoAssociado) {
-				int idProprietario = Integer.parseInt(request.getParameter("idProprietario"));
-				proprietario = proprietarioDao.findById(idProprietario);
-			}
 			
 			animal.setProprietario(proprietario);
 			animal.setCor(cor);

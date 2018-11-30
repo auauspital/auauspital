@@ -74,7 +74,7 @@
 		</c:choose>
 		
 
-        <a href="atendAluno.jsp">
+        <a href="loadtelaatendimentosaluno">
           <div class="box">
 
             <div class="inner" style="background-color:#FFAB00">
@@ -89,7 +89,7 @@
     <!-- Segunda fileira de botões -->
     <div class="grid">
       <div class="row">
-        <a href="atendProfessor.jsp">
+        <a href="loadtelaatendimentosprofessor">
           <div class="box">
 
             <div class="inner" style="background-color:#EAEAEA">
