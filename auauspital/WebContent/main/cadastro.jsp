@@ -29,9 +29,20 @@
     <!--===============================================================================================-->
     <script type="text/javascript">
     	$(document).ready(function() {
+
+    		var proprietarios = [
+				<c:forEach items="${proprietarios}" var="proprietario">
+					{
+						idProprietario: <c:out value="${proprietario.idProprietario}" />,
+						label: "<c:out value="${proprietario.nome}" /> (<c:out value="${proprietario.cpf}" />)",
+					},
+				</c:forEach>
+			];
+        	
     		$("#btn-editarProprietario").click(function() {
     			$("#proprietarioEditadoControle").attr("value", "true");
     			$("#proprietarioNovoCadastrado").attr("value", "false");
+    			$('#proprietarioNovoAssociado').attr("value", "false");
     			$("#box-dadosDono").css("display", "none");
     			$("#box-dadosEndereco").css("display", "block");
     		});
@@ -52,10 +63,33 @@
         					$("#box-dadosDono").css("display", "none");
         					$("#proprietarioNovoCadastrado").attr("value", "true");
         					$("#proprietarioEditadoControle").attr("value", "false");
+        					$('#proprietarioNovoAssociado').attr("value", "false");
         					
         					$(this).dialog("close");
         				},
         				"Associar": function() {
+
+        					$('input[name=dadosDono]').removeAttr("disabled");
+            				$('#botoesControle').css("display", "none");
+							$('#proprietarioNovoAssociado').attr("value", "true");
+							$("#proprietarioNovoCadastrado").attr("value", "false");
+        					$("#proprietarioEditadoControle").attr("value", "false");
+            				$('input[name=dadosDono]').autocomplete({
+								source: proprietarios,
+								select: function(event, ui) {
+									event.preventDefault();
+									$('input[name=dadosDono]').val(ui.item.label);
+									var cpfProprietario = ui.item.label;
+									var tam = proprietarios.length;
+									for(i=0;i<tam;i++) {
+										if(proprietarios[i].label == cpfProprietario) {
+											$('input[name=idProprietario]').attr("value", proprietarios[i].idProprietario);
+										}
+									}
+									$('input[name=dadosDono]').attr("disabled", "disabled");
+								}
+                    		});
+            				
         					$(this).dialog("close");
         				}
         			}
@@ -101,8 +135,10 @@
           		<c:when test="${not empty isEditarCadastro}">
           			<input type="hidden" name="isEditarCadastrado" value="true" />
           			<input type="hidden" name="idAnimal" value="<c:out value="${animal.idAnimal}" />" />
+          			<input type="hidden" name="idProprietario" value="<c:out value="${animal.proprietario.idProprietario}" />" />
           			<input type="hidden" id="proprietarioEditadoControle" name="isProprietarioEditado" value="false" />
           			<input type="hidden" id="proprietarioNovoCadastrado" name="isProprietarioNovoCadastrado" value="false" />
+          			<input type="hidden" id="proprietarioNovoAssociado" name="isProprietarioNovoAssociado" value="false" />
           		</c:when>
           		<c:otherwise>
           			<input type="hidden" name="isEditarCadastrado" value="false" />
@@ -160,7 +196,7 @@
 	            		 	</div>
 	            		 </div>
 	            		 
-	            		 <div class="form-group">
+	            		 <div id="botoesControle" class="form-group">
 	            		 	<!-- Botoes para edicao ou troca de dono -->
 	            		 	<label for="full_name_id" class="control-label col-sm-3" id="prontuario"></label>
 	            		 	<div class="col-sm-9">

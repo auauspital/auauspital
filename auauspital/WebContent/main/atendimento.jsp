@@ -45,7 +45,7 @@
 					{
 						idProprietario: <c:out value="${proprietario.idProprietario}" />,
 						nome: "<c:out value="${proprietario.nome}" />",
-						label: "<c:out value="${proprietario.cpf}" />",
+						label: "<c:out value="${proprietario.nome}" /> (<c:out value="${proprietario.cpf}" />)",
 						animais: [
 							<c:forEach items="${proprietario.animais}" var="animal">
 								{

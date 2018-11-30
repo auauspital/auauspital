@@ -1,6 +1,7 @@
 package br.ufrrj.auauspital.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufrrj.auauspital.dao.AnimalDao;
+import br.ufrrj.auauspital.dao.ProprietarioDao;
 import br.ufrrj.auauspital.dao.UsuarioDao;
 import br.ufrrj.auauspital.model.Animal;
+import br.ufrrj.auauspital.model.Proprietario;
 import br.ufrrj.auauspital.model.Usuario;
 
 @WebServlet("/main/loadtelacadastro")
@@ -36,7 +39,11 @@ public class LoadTelaCadastro extends HttpServlet {
 			request.setAttribute("isEditarCadastro", true);
 		}
 		
+		ProprietarioDao proprietarioDao = new ProprietarioDao();
+		ArrayList<Proprietario> proprietarios = (ArrayList<Proprietario>)proprietarioDao.findAll();
+		
 		request.setAttribute("membrosCadastro", membros);
+		request.setAttribute("proprietarios", proprietarios);
 		RequestDispatcher rd = request.getRequestDispatcher("/main/cadastro.jsp");
 		rd.forward(request, response);
 		return;
