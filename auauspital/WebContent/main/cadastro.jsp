@@ -32,21 +32,27 @@
 
         	var isEditar = <c:out value="${not empty isEditarCadastro}" />;
 
+        		var proprietarios = [
+    				<c:forEach items="${proprietarios}" var="proprietario">
+    					{
+    						idProprietario: <c:out value="${proprietario.idProprietario}" />,
+    						label: "<c:out value="${proprietario.nome}" /> (<c:out value="${proprietario.cpf}" />)",
+    						nome: "<c:out value="${proprietario.nome}" />",
+    						cpf: "<c:out value="${proprietario.cpf}" />",
+    						logradouro: "<c:out value="${proprietario.endereco.logradouro}" />",
+    						complemento: "<c:out value="${proprietario.endereco.complemento}" />",
+    						cidade: "<c:out value="${proprietario.endereco.cidade}" />",
+    						cep: "<c:out value="${proprietario.endereco.cep}" />"
+    					},
+    				</c:forEach>
+    			];
+            	
             if(!isEditar) {
 				$("#btn-editarProprietario").css("display", "none");
 				$('input[name=dadosDono]').val("");
 				$('input[name=dadosDono]').attr("placeholder", "Digite aqui o CPF do proprietário desejado...");
 				$('#linha-dadosDono').css("display", "none");
             }
-
-    		var proprietarios = [
-				<c:forEach items="${proprietarios}" var="proprietario">
-					{
-						idProprietario: <c:out value="${proprietario.idProprietario}" />,
-						label: "<c:out value="${proprietario.nome}" /> (<c:out value="${proprietario.cpf}" />)",
-					},
-				</c:forEach>
-			];
         	
     		$("#btn-editarProprietario").click(function() {
     			$("#proprietarioEditadoControle").attr("value", "true");
@@ -94,6 +100,14 @@
 									for(i=0;i<tam;i++) {
 										if(proprietarios[i].label == cpfProprietario) {
 											$('input[name=idProprietario]').attr("value", proprietarios[i].idProprietario);
+											$('input[name=nomeDono]').val(proprietarios[i].nome);
+				        					$('input[name=cpf]').val(proprietarios[i].cpf);
+				        					$('input[name=logradouro]').val(proprietarios[i].logradouro);
+				        					$('input[name=complemento]').val(proprietarios[i].complemento);
+				        					$('input[name=cidade]').val(proprietarios[i].cidade);
+				        					$('input[name=cep]').val(proprietarios[i].cep);
+
+				        					$('input[name=idProprietario]').val(proprietarios[i].idProprietario);
 										}
 									}
 									$('input[name=dadosDono]').attr("disabled", "disabled");
@@ -145,16 +159,15 @@
           		<c:when test="${not empty isEditarCadastro}">
           			<input type="hidden" name="isEditarCadastrado" value="true" />
           			<input type="hidden" name="idAnimal" value="<c:out value="${animal.idAnimal}" />" />
-          			<input type="hidden" name="idProprietario" value="<c:out value="${animal.proprietario.idProprietario}" />" />
           			<input type="hidden" id="proprietarioEditadoControle" name="isProprietarioEditado" value="false" />
-          			<input type="hidden" id="proprietarioNovoCadastrado" name="isProprietarioNovoCadastrado" value="false" />
-          			<input type="hidden" id="proprietarioNovoAssociado" name="isProprietarioNovoAssociado" value="false" />
           		</c:when>
           		<c:otherwise>
           			<input type="hidden" name="isEditarCadastrado" value="false" />
           		</c:otherwise>
           	</c:choose>
-			
+			<input type="hidden" name="idProprietario" value="<c:out value="${animal.proprietario.idProprietario}" />" />
+			<input type="hidden" id="proprietarioNovoCadastrado" name="isProprietarioNovoCadastrado" value="false" />
+          	<input type="hidden" id="proprietarioNovoAssociado" name="isProprietarioNovoAssociado" value="false" />
 			
             <div class="form-group">
               <!-- Nome do animal -->

@@ -91,12 +91,21 @@ public class CadastraAnimal extends HttpServlet {
 			/*
 			 * Esta parte do IF realiza o cadastramento de um novo animal
 			 */	
+			boolean isProprietarioNovoAssociado = Boolean.parseBoolean(request.getParameter("isProprietarioNovoAssociado"));
 			endereco = new Endereco(logradouro, cep, uf, cidade, complemento);
-			proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
-			animal = new Animal(nomePet, tipo, idade, cor, proprietario);
-			proprietario.addAnimal(animal);
-			animalDao.persist(animal);
-			proprietarioDao.persist(proprietario);		
+			if(isProprietarioNovoAssociado) {
+				int idProprietario = Integer.parseInt(request.getParameter("idProprietario"));
+				proprietario = proprietarioDao.findById(idProprietario);
+				animal = new Animal(nomePet, tipo, idade, cor, proprietario);
+				proprietario.addAnimal(animal);
+				animalDao.persist(animal);
+			} else {
+				proprietario = new Proprietario(nomeDono, cpf, (byte)3, endereco);
+				animal = new Animal(nomePet, tipo, idade, cor, proprietario);
+				proprietario.addAnimal(animal);
+				proprietarioDao.persist(proprietario);	
+				animalDao.persist(animal);
+			}
 		} else {
 			/*
 			 * Esta parte do IF realiza o cadastramento do prontuario, mas
