@@ -77,7 +77,7 @@ public class CadastraAnimal extends HttpServlet {
 		
 		if(possuiDataRetorno.equals("y")) {
 			String dataRetornoParam = request.getParameter("dataRetorno");
-			DateFormat format = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt", "BR"));
+			DateFormat format = new SimpleDateFormat("yyyy-MM-dddd", new Locale("pt", "BR"));
 			try {
 				dataRetorno = format.parse(dataRetornoParam);
 			} catch (ParseException e) {
@@ -106,7 +106,7 @@ public class CadastraAnimal extends HttpServlet {
 			proprietarioDao.persist(proprietario);
 		}
 		
-		if(isProprietarioNovoAssociado) {
+		if((isProprietarioNovoAssociado)||(((!isProprietarioNovoAssociado)&&(!isProprietarioNovoCadastrado)&&(!isProprietarioEditado)&&(isEditarCadastrado)))) {
 			proprietario = proprietarioDao.findById(idProprietario);
 		}
 		
