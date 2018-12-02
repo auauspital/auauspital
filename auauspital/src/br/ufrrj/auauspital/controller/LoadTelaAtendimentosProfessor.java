@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ufrrj.auauspital.dao.ProntuarioDao;
+import br.ufrrj.auauspital.dao.UsuarioDao;
 import br.ufrrj.auauspital.model.Prontuario;
+import br.ufrrj.auauspital.model.Usuario;
 
 /**
  * Servlet implementation class LoadTelaAtendimentosProfessor
@@ -25,8 +27,11 @@ public class LoadTelaAtendimentosProfessor extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProntuarioDao prontuarioDao = new ProntuarioDao();
+		UsuarioDao usuarioDao = new UsuarioDao();
 		ArrayList<Prontuario> prontuarios = prontuarioDao.findAllByProfessor();  
 		request.setAttribute("prontuarios", prontuarios);
+		ArrayList<Usuario> usuarios = usuarioDao.findAllProfessor();
+		request.setAttribute("usuarios", usuarios);
 		RequestDispatcher rd =  request.getRequestDispatcher("/main/atendProfessor.jsp");
 		rd.forward(request, response);
 		return;

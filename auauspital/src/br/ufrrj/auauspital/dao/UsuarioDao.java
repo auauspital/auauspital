@@ -1,5 +1,6 @@
 package br.ufrrj.auauspital.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -34,6 +35,26 @@ public class UsuarioDao extends DAO<Usuario> {
 		try {
 			Usuario usuarioRes = (Usuario)q.getSingleResult();
 			return usuarioRes;
+		} catch(NoResultException e) {
+			return null;
+		}
+	}
+
+	public ArrayList<Usuario> findAllAlunos() {
+		Query q = getManager().createQuery("SELECT u FROM Usuario u WHERE u.tipo=1");
+		try {
+			ArrayList<Usuario> alunos = (ArrayList<Usuario>)q.getResultList();
+			return alunos;
+		} catch(NoResultException e) {
+			return null;
+		}
+	}
+	
+	public ArrayList<Usuario> findAllProfessor() {
+		Query q = getManager().createQuery("SELECT u FROM Usuario u WHERE u.tipo = 0");
+		try {
+			ArrayList<Usuario> professores = (ArrayList<Usuario>)q.getResultList();
+			return professores;
 		} catch(NoResultException e) {
 			return null;
 		}

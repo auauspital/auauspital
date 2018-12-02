@@ -5,18 +5,78 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8">
-  <!--===============================================================================================-->
-  <meta name="viewport" content="initial-scale=1">
-  <!--===============================================================================================-->
-  <title>Atendimentos por professores</title>
-  <!--===============================================================================================-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!--===============================================================================================-->
-  <link rel="stylesheet" href="/auauspital/src/css/historicoAtendimento.css">
-  <!--===============================================================================================-->
-  <link rel="stylesheet" href="/auauspital/src/css/estilo.css">
-
+ <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/auauspital/src/css/estilo.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="/auauspital/src/css/historicoAtendimento.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="/auauspital/src/css/jquery-ui.min.css" />
+    <!--===============================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/validacao.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/verificação.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/jquery-ui.min.js"></script>
+    <!--===============================================================================================-->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var prontuarios = [
+	        <c:forEach items="${prontuarios}" var="prontuario">
+	            {
+	                label: "<c:out value="${prontuario.professorResponsavel.nome}" /> (<c:out value="${prontuario.professorResponsavel.cpf}" />)",
+	                value: "<c:out value="${prontuario.professorResponsavel.id}" />",
+	                idProfessor: <c:out value="${prontuario.professorResponsavel.id}" />,
+	                nomeProfessor: "<c:out value="${prontuario.professorResponsavel.nome}" />",
+	                cpfProfessor: "<c:out value="${prontuario.professorResponsavel.cpf}" />",
+	                nomeAnimal: "<c:out value="${prontuario.animal.nome}" />",
+	                tipoAnimal: "<c:out value="${prontuario.animal.tipo}" />",
+	                dataAtendimento: "<c:out value="${prontuario.dataAtendimento}" />",
+	                nomeAluno: "<c:out value="${prontuario.aluno.nome}" />"
+	            },
+	        </c:forEach>
+	    ];
+		
+		var professores = [
+			<c:forEach items="${usuarios}" var="professor">
+				{
+					label: "<c:out value="${professor.nome}" /> (<c:out value="${professor.cpf}" />)",
+					value: <c:out value="${professor.id}" />
+				},
+			</c:forEach>
+		];
+	   
+	    	$('#buscaProfessor').autocomplete({
+	            source: professores,
+	            select: function(event, ui) {
+	                event.preventDefault();
+	                $('#buscaProfessor').val(ui.item.label);
+	                var idBuscado = ui.item.value;
+	                var tamanho = prontuarios.length;
+					var tabela = document.getElementsByTagName('tbody')[0];
+					tabela.innerHTML = "";
+	                for(i=0;i<tamanho;i++) {
+	                    if(prontuarios[i].idProfessor==idBuscado) {
+	                    	var conteudo = "<tr>";
+	                    	conteudo += "<td>" + prontuarios[i].nomeProfessor + "(" + prontuarios[i].cpfProfessor + ")</td>";
+	                    	conteudo += "<td>" + prontuarios[i].nomeAnimal + "</td>";
+	                    	conteudo += "<td>" + prontuarios[i].tipoAnimal + "</td>";
+	                    	conteudo += "<td>" + prontuarios[i].dataAtendimento + "</td>";
+	                    	conteudo += "<td>" + prontuarios[i].nomeAluno + "</td>";
+	                    	conteudo += "</tr>";       
+							tabela.insertAdjacentHTML('beforeend', conteudo);
+	                    }
+	                }                
+	           }
+	       });
+	   });		 
+	        
+</script>
 </head>
 
 <body>
@@ -45,11 +105,15 @@
     </div>
 		</div> <!-- fim do segundo div "row"-->
 
-
-
-
     <div class="column3">
-
+			
+			<div class="bordaTop2"><h4 style=" font-size: 25px; padding-top:50px;">Busque pelo CPF do professor:</h4></div>
+			 <input  type="text" class="form-control" id="buscaProfessor" name="busca" placeholder="Digite o CPF do professor" style="border-radius:2px;">
+          <br>
+			<div style="height:50px;">
+			
+            <button type="submit"class="btn btn-form" value="Submit" style="margin-top:0!important; float: left!important;">Buscar Professor</button>
+          </div >
 
 			<div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
 			<c:choose>
@@ -65,15 +129,7 @@
 					</tr>
 				</thead> <!-- fim da estrutura/cabeçalho da tabela -->
 				<tbody> <!-- Começo da parte com dados da tabela-->
-					<c:forEach items="${prontuarios}" var="prontuario"> 
-						<tr>
-						<td><c:out value="${prontuario.professorResponsavel.nome}" /></td>
-						<td><c:out value="${prontuario.animal.nome}" /></td>
-						<td><c:out value="${prontuario.animal.tipo}" /></td>
-						<td><c:out value="${prontuario.dataAtendimento}" /></td>
-						<td><c:out value="${prontuario.aluno.nome}" /></td>
-						</tr>
-					</c:forEach>
+					
 				</tbody>
 				</table>
 				</c:when>
@@ -100,10 +156,10 @@
     <h5>© 2018 - Site feito por Alexia Duarte, Caio Sabadin, Camila Marques e Zidane Gomes</h5>
   </div>
 <!-- Adicionando as bibliotecas do bootstrap, jquary, javascript e icone-->
-<script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+<%--<script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>--%>
 
 </body>
 </html>

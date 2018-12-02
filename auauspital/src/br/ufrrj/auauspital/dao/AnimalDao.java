@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import br.ufrrj.auauspital.model.Animal;
 import br.ufrrj.auauspital.model.Prontuario;
+import br.ufrrj.auauspital.model.Usuario;
 
 public class AnimalDao extends DAO<Animal> {
 	
@@ -27,4 +28,16 @@ public class AnimalDao extends DAO<Animal> {
 			return null;
 		}
 	}
+
+	public ArrayList<Animal> findAllAnimal() {
+		Query q = getManager().createQuery("SELECT a FROM Animal a");
+		try {
+			ArrayList<Animal> animais = (ArrayList<Animal>)q.getResultList();
+			return animais;
+		} catch(NoResultException e) {
+			return null;
+		}
+	}
+
+	
 }

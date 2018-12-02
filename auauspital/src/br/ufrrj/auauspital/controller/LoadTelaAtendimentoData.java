@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.ufrrj.auauspital.dao.AnimalDao;
 import br.ufrrj.auauspital.dao.ProntuarioDao;
-import br.ufrrj.auauspital.dao.UsuarioDao;
+import br.ufrrj.auauspital.model.Animal;
 import br.ufrrj.auauspital.model.Prontuario;
-import br.ufrrj.auauspital.model.Usuario;
 
 /**
- * Servlet implementation class LoadTelaAtendimentosAluno
+ * Servlet implementation class LoadTelaAtendimentoData
  */
-@WebServlet("/main/loadtelaatendimentosaluno")
-public class LoadTelaAtendimentosAluno extends HttpServlet {
+@WebServlet("/main/loadtelaatendimentodata")
+public class LoadTelaAtendimentoData extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -27,14 +27,11 @@ public class LoadTelaAtendimentosAluno extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProntuarioDao prontuarioDao = new ProntuarioDao();
-		UsuarioDao usuarioDao = new UsuarioDao();
-		ArrayList<Prontuario> prontuarios = prontuarioDao.findAllByAluno();
+		ArrayList<Prontuario> prontuarios = prontuarioDao.findAllByAnimalData();
 		request.setAttribute("prontuarios", prontuarios);
-		ArrayList<Usuario> usuarios = usuarioDao.findAllAlunos();
-		request.setAttribute("usuarios", usuarios);
-		RequestDispatcher rd =  request.getRequestDispatcher("/main/atendAluno.jsp");
+		
+		RequestDispatcher rd =  request.getRequestDispatcher("/main/animalRetorno.jsp");
 		rd.forward(request, response);
-		return;
 	}
 
 }

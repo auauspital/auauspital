@@ -11,14 +11,74 @@
   <!--===============================================================================================-->
   <title>Prontuários por animal</title>
   <!--===============================================================================================-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!--===============================================================================================-->
-  <link rel="stylesheet" href="/auauspital/src/css/prontuario.css">
-  <!--===============================================================================================-->
-  <link rel="stylesheet" href="/auauspital/src/css/estilo.css">
-  <!--===============================================================================================-->
-  <script src="/auauspital/src/js/validacao.js"></script>
-  <!--===============================================================================================-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/auauspital/src/css/estilo.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="/auauspital/src/css/historicoAtendimento.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="/auauspital/src/css/jquery-ui.min.css" />
+    <!--===============================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/validacao.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/verificação.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/jquery-ui.min.js"></script>
+    <!--===============================================================================================-->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var prontuarios = [
+	        <c:forEach items="${prontuarios}" var="prontuario">
+	            {
+	                label: "<c:out value="${prontuario.animal.nome}" /> (<c:out value="${prontuario.animal.proprietario.nome}" />)",
+	                value: "<c:out value="${prontuario.animal.idAnimal}" />",
+	                idAnimal: <c:out value="${prontuario.animal.idAnimal}" />,
+	                idProntuario: <c:out value="${prontuario.idProntuario}" />,
+	                nomeProprietario: "<c:out value="${prontuario.animal.proprietario.nome}" />",
+	                cpfProprietario: "<c:out value="${prontuario.animal.proprietario.cpf}" />"
+	               
+	            },
+	        </c:forEach>
+	    ];
+		
+		var animais = [
+			<c:forEach items="${animais}" var="animal">
+				{
+					label: "<c:out value="${animal.nome}" /> (<c:out value="${animal.proprietario.nome}" />)",
+					value: <c:out value="${animal.idAnimal}" />
+				},
+			</c:forEach>
+		];
+	   
+	    	$('#buscaAnimal').autocomplete({
+	            source: animais,
+	            select: function(event, ui) {
+	                event.preventDefault();
+	                $('#buscaAnimal').val(ui.item.label);
+	                var idBuscado = ui.item.value;
+	                var tamanho = prontuarios.length;
+					var tabela = document.getElementsByTagName('tbody')[0];
+					tabela.innerHTML = "";
+	                for(i=0;i<tamanho;i++) {
+	                    if(prontuarios[i].idAnimal==idBuscado) {
+	                    	var conteudo = "<tr>";
+	                    	conteudo += "<td>" + prontuarios[i].idProntuario + "</td>";
+	                    	conteudo += "<td>" + prontuarios[i].nomeProprietario + "</td>";
+	                    	conteudo += "<td>" + prontuarios[i].cpfProprietario + "</td>";
+	               
+	                    	conteudo += "</tr>";       
+							tabela.insertAdjacentHTML('beforeend', conteudo);
+	                    }
+	                }                
+	           }
+	       });
+	   });		 
+	        
+</script>
 
 </head>
 <body>
@@ -46,135 +106,51 @@
 
 
     <div class="column3" style="margin-top:-45px;">
-      <div class="bordaTop2"><h4 style=" font-size: 25px; padding-top:50px;">Busque pelo nome do animal:</h4></div>
+      
         <div class="bordaTop"><img src="/auauspital/src/imagens/icones/veterinarian.png" alt="gatinho" width=120 height=120></div>
 
-
-
-
-      <div class="form-group">
-
-        <form class="form-horizontal" id='form-cadastro' name="formBusca" action="/action_page.php" onsubmit="return validateForm3()" method="post">
-
-          <input  type="text" class="form-control" name="busca" placeholder="Digite o nome do animal" style="border-radius:2px;">
+		<div class="bordaTop2"><h4 style=" font-size: 25px; padding-top:50px;">Busque pelo nome do animal</h4></div>
+			 <input  type="text" class="form-control" id="buscaAnimal" name="busca" placeholder="Digite o nome do animal" style="border-radius:2px;">
           <br>
-          <div style="height:50px;">
-            <button type="submit"class="btn btn-form" value="Submit" style="margin-top:0!important; float: left!important;">Buscar animal</button>
+			<div style="height:50px;">
+			
+            <button type="submit" class="btn btn-form" id="btn-Teste" value="Submit" style="margin-top:0!important; float: left!important;">Buscar animal</button>
           </div >
-          <div class="table-overflow">
-            <div class="list-group">
-              <a href="#" class="list-group-item list-group-item-action">
+          <div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
+			<c:choose>
+				<c:when test="${not empty prontuarios}">
+				<table class="table table-bordered table-hover"style="font: 13px avenirLight !important;color: #707070 !important; height:255px!important;"> <!--Criando a tabela-->
+				<thead class="thead-light">  <!-- Estrutura/cabeçalho da tabela, "primeira linha" -->
+				<tr style="font: 13px avenir !important;color: #707070 !important;">
+						<th>ID Prontuário</th>
+						<th>Nome do Dono</th>
+						<th>CPF do Dono</th>
+						
+					</tr>
+				</thead> <!-- fim da estrutura/cabeçalho da tabela -->
+				<tbody> <!-- Começo da parte com dados da tabela-->
+					 
+				</tbody>
+				</table>
+				</c:when>
+				<c:otherwise>
+					<p>Não há prontuários cadastrados no sistema.</p>
+				</c:otherwise>
+			</c:choose>
 
-                <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia</h6>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-
-                <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-
-                <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-
-                <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-                <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-                <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-                <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action">
-                <h6>Nome: Logan  ||  Tipo de animal: Hamster  ||  Data de cadastro: 05/11/2018  ||  Médico(a) responsável: Alexia </h6>
-              </a>
-            </div>
-          </div>
+		</div>
 
 
-
-      </div>
-      <br>
-      <div id="exibição">
-
-          <!--Aqui vai abrir o prontuario, pode fazer sua querry aki meu lindo-->
-          <h3>A Idade de ser feliz</h3>
-          <p>
-            Uma só idade para a gente se encantar com a vida
-            e viver apaixonadamente
-            e desfrutar tudo com toda intensidade
-            sem medo nem culpa de sentir prazer
-  </p>
-        <p> Fase dourada em que a gente pode criar e recriar a vida
-            à nossa própria imagem e semelhança
-            e sorrir e cantar e brincar e dançar
-            e vestir-se com todas as cores
-            e entregar-se a todos os amores
-            experimentando a vida em todos os seus sabores
-            sem preconceito ou pudor
-  </p>
-          <p>  Tempo de entusiasmo e de coragem
-            em que todo desafio é mais um convite à luta
-            que a gente enfrenta com toda a disposição de tentar algo novo,
-            de novo e de novo, e quantas vezes for preciso
-              </p>
-          <p>  Essa idade, tão fugaz na vida da gente,
-            chama-se presente,
-            e tem apenas a duração do instante que passa ...
-            ... doce pássaro do aqui e agora
-            que quando se dá por ele já partiu para nunca mais!
-          </p>
-
-          <p>
-            Uma só idade para a gente se encantar com a vida
-            e viver apaixonadamente
-            e desfrutar tudo com toda intensidade
-            sem medo nem culpa de sentir prazer
-  </p>
-        <p> Fase dourada em que a gente pode criar e recriar a vida
-            à nossa própria imagem e semelhança
-            e sorrir e cantar e brincar e dançar
-            e vestir-se com todas as cores
-            e entregar-se a todos os amores
-            experimentando a vida em todos os seus sabores
-            sem preconceito ou pudor
-  </p>
-          <p>  Tempo de entusiasmo e de coragem
-            em que todo desafio é mais um convite à luta
-            que a gente enfrenta com toda a disposição de tentar algo novo,
-            de novo e de novo, e quantas vezes for preciso
-              </p>
-          <p>  Essa idade, tão fugaz na vida da gente,
-            chama-se presente,
-            e tem apenas a duração do instante que passa ...
-            ... doce pássaro do aqui e agora
-            que quando se dá por ele já partiu para nunca mais!
-          </p>
-
-
-      </div>
-
-
-      <br><br>
-
-
-        <div class="push"style="height:100px;"></div>
-    </div>
-
-    </form>
-    <div class="column4" ></div>
+     
   </div>
   <div class="footer">
     <h5>© 2018 - Site feito por Alexia Duarte, Caio Sabadin, Camila Marques e Zidane Gomes</h5>
   </div>
   <!-- Adicionando as bibliotecas do bootstrap, jquary, javascript e icone-->
-  <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+  <%--<script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>--%>
 
   </body>
   </html>

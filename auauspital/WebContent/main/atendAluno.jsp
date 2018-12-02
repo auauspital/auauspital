@@ -11,12 +11,77 @@
   <!--===============================================================================================-->
   <title>Atendimentos por alunos</title>
   <!--===============================================================================================-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!--===============================================================================================-->
-  <link rel="stylesheet" href="/auauspital/src/css/historicoAtendimento.css">
-  <!--===============================================================================================-->
-  <link rel="stylesheet" href="/auauspital/src/css/estilo.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/auauspital/src/css/estilo.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="/auauspital/src/css/historicoAtendimento.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" href="/auauspital/src/css/jquery-ui.min.css" />
+    <!--===============================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/validacao.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/verificação.js"></script>
+    <!--===============================================================================================-->
+    <script src="/auauspital/src/js/jquery-ui.min.js"></script>
+    <!--===============================================================================================-->
+	<script type="text/javascript">
+	$(document).ready(function() {
+		var prontuarios = [
+	        <c:forEach items="${prontuarios}" var="prontuario">
+	            {
+	                label: "<c:out value="${prontuario.aluno.nome}" /> (<c:out value="${prontuario.aluno.cpf}" />)",
+	                value: "<c:out value="${prontuario.aluno.id}" />",
+	                idAluno: <c:out value="${prontuario.aluno.id}" />,
+	                nomeAluno: "<c:out value="${prontuario.aluno.nome}" />",
+	                cpfAluno: "<c:out value="${prontuario.aluno.cpf}" />",
+	                nomeAnimal: "<c:out value="${prontuario.animal.nome}" />",
+	                tipoAnimal: "<c:out value="${prontuario.animal.tipo}" />",
+	                dataAtendimento: "<c:out value="${prontuario.dataAtendimento}" />",
+	                nomeProfessor: "<c:out value="${prontuario.professorResponsavel.nome}" />"
+	            },
+	        </c:forEach>
+	    ];
+		
+		var alunos = [
+			<c:forEach items="${usuarios}" var="aluno">
+				{
+					label: "<c:out value="${aluno.nome}" /> (<c:out value="${aluno.cpf}" />)",
+					value: <c:out value="${aluno.id}" />
+				},
+			</c:forEach>
+		];
+	   
+	    	$('#buscaAluno').autocomplete({
+	            source: alunos,
+	            select: function(event, ui) {
+	                event.preventDefault();
+	                $('#buscaAluno').val(ui.item.label);
+	                var idBuscado = ui.item.value;
+	                var tamanho = prontuarios.length;
+					var tabela = document.getElementsByTagName('tbody')[0];
+					tabela.innerHTML = "";
+	                for(i=0;i<tamanho;i++) {
+	                    if(prontuarios[i].idAluno==idBuscado) {
+	                    	var conteudo = "<tr>";
+	                    	conteudo += "<td>" + prontuarios[i].nomeAluno + "(" + prontuarios[i].cpfAluno + ")</td>";
+	                    	conteudo += "<td>" + prontuarios[i].nomeAnimal + "</td>";
+	                    	conteudo += "<td>" + prontuarios[i].tipoAnimal + "</td>";
+	                    	conteudo += "<td>" + prontuarios[i].dataAtendimento + "</td>";
+	                    	conteudo += "<td>" + prontuarios[i].nomeProfessor + "</td>";
+	                    	conteudo += "</tr>";       
+							tabela.insertAdjacentHTML('beforeend', conteudo);
+	                    }
+	                }                
+	           }
+	       });
+	   });		 
+	        
+</script>
 </head>
 
 <body>
@@ -28,7 +93,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li><a href="home.jsp">Home<span class="glyphicon glyphicon-home"></span></a></li>
-        <li><a href="logoutprocessor">Sair<span class="glyphicon glyphicon-log-out"></span></a></li>
+        <li><a href="logoutprocessor"> Sair <span class="glyphicon glyphicon-log-out"></span></a></li>
       </ul>
     </div>
   </nav>
@@ -45,12 +110,14 @@
     </div>
 		</div> <!-- fim do segundo div "row"-->
 
-
-
-
     <div class="column3">
-
-
+		<div class="bordaTop2"><h4 style=" font-size: 25px; padding-top:50px;">Busque pelo CPF do aluno:</h4></div>
+			 <input  type="text" class="form-control" id="buscaAluno" name="busca" placeholder="Digite o CPF do aluno" style="border-radius:2px;">
+          <br>
+			<div style="height:50px;">
+			
+            <button type="submit" class="btn btn-form" id="btn-Teste" value="Submit" style="margin-top:0!important; float: left!important;">Buscar aluno</button>
+          </div >
 			<div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
 			<c:choose>
 				<c:when test="${not empty prontuarios}">
@@ -65,15 +132,7 @@
 					</tr>
 				</thead> <!-- fim da estrutura/cabeçalho da tabela -->
 				<tbody> <!-- Começo da parte com dados da tabela-->
-					<c:forEach items="${prontuarios}" var="prontuario"> 
-						<tr>
-						<td><c:out value="${prontuario.aluno.nome}" /></td>
-						<td><c:out value="${prontuario.animal.nome}" /></td>
-						<td><c:out value="${prontuario.animal.tipo}" /></td>
-						<td><c:out value="${prontuario.dataAtendimento}" /></td>
-						<td><c:out value="${prontuario.professorResponsavel.nome}" /></td>
-						</tr>
-					</c:forEach>
+					 
 				</tbody>
 				</table>
 				</c:when>
@@ -100,10 +159,10 @@
     <h5>© 2018 - Site feito por Alexia Duarte, Caio Sabadin, Camila Marques e Zidane Gomes</h5>
   </div>
 <!-- Adicionando as bibliotecas do bootstrap, jquary, javascript e icone-->
-<script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+<%-- <script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>--%>
 
 </body>
 </html>

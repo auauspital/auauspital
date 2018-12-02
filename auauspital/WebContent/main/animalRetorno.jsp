@@ -19,7 +19,7 @@
   <!--===============================================================================================-->
   <script src="/auauspital/src/js/validacao.js"></script>
   <!--===============================================================================================-->
-
+  
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -45,85 +45,48 @@
 
 
     <div class="column3"style="margin-top:-45px;">
-      <form  name="formBusca" action="/action_page.php" onsubmit="return validateForm3()" method="post">
-      <div class="bordaTop2"><h4 style=" font-size: 25px; padding-top:50px;">Busque pelo nome do animal:</h4></div>
-        <div class="bordaTop"><img src="/auauspital/src/imagens/icones/gatinho.png" alt="gatinho" width=120 height=120></div>
-
-      <!--Esse input é onde a pessoa vai digitar o nome do animal que deseja procurar o prontuario-->
-      <input id="nomeAnimal" type="text" class="form-control" name="busca" placeholder="Digite o nome do animal">
-      <br>
-      <div style="height:40px;">
-        <button type="submit"class="btn btn-form" value="Submit" style="margin-top:0!important; float: left!important;">Buscar animal</button>
-      </div >
+     
       <!--Divirta-se com seu query por aki, acho q vai ter q colocar um action ai no input de cima-->
       <div class="push"style="height:20px;"></div>
       <div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
-      <table class="table table-bordered table-hover"> <!--Criando a tabela-->
-        <thead class="thead-light">  <!-- Estrutura/cabeçalho da tabela, "primeira linha" -->
-          <tr style="font: 13px avenir !important;color: #707070 !important;">
-            <th>Nome</th>
-            <th>Tipo de animal</th>
-            <th>Nome do dono(a)</th>
-            <th>Data do Retorno</th>
-          </tr>
-        </thead> <!-- fim da estrutura/cabeçalho da tabela -->
-        <tbody style="font: 13px avenirLight !important;color: #707070 !important;"> <!-- Começo da parte com dados da tabela-->
-
-          <tr> <!-- Aqui provavelmente entrar um forech das linha da tabela, não sei como escreve-->
-            <td>Alvin</td> <!-- Aqui provavelmente entra o forech dos ""nomes""-->
-            <td>Joaninha</td> <!-- Aqui provavelmente entra o forech dos ""Tipo de animal""-->
-            <td>Ferb</td> <!-- Aqui provavelmente entra o forech dos ""Nome do dono(a)""-->
-            <td>10/12/18</td> <!-- Aqui provavelmente entra o forech dos ""CPF do dono(a)""-->
-          </tr>
-
-
-                                                  <!--Aqui sera retirado-->
-
-                  <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>Alvin</td>
-            <td>Joaninha</td>
-            <td>Ferb</td>
-            <td>10/12/18</td>
-          </tr>
-                 <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>Alvin</td>
-            <td>Joaninha</td>
-            <td>Ferb</td>
-            <td>10/12/18</td>
-          </tr>
-                <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>Alvin</td>
-            <td>Joaninha</td>
-            <td>Ferb</td>
-            <td>10/12/18</td>
-          </tr>
-                <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>Alvin</td>
-            <td>Joaninha</td>
-            <td>Ferb</td>
-            <td>10/12/18</td>
-          </tr>
-                <!--Repitindo linha apenas para visualização antes de entrar a parte do back-->
-          <tr>
-            <td>Alvin</td>
-            <td>Joaninha</td>
-            <td>Ferb</td>
-            <td>10/12/18</td>
-          </tr>
-                      <!--Retirado até aqui, fé-->
-        </tbody>
-      </table>
+  		
+        <c:choose>
+				<c:when test="${not empty prontuarios}">
+				<table class="table table-bordered table-hover"style="font: 13px avenirLight !important;color: #707070 !important; height:255px!important;"> <!--Criando a tabela-->
+				<thead class="thead-light">  <!-- Estrutura/cabeçalho da tabela, "primeira linha" -->
+				<tr style="font: 13px avenir !important;color: #707070 !important;">
+						<th>ID do Prontuario</th>
+						<th>Nome do animal</th>
+						<th>Nome do dono</th>	
+						<th>Data de Retorno</th>
+						<th>Professor(a) responsável</th>
+					</tr>
+				</thead> <!-- fim da estrutura/cabeçalho da tabela -->
+				<tbody> <!-- Começo da parte com dados da tabela-->
+					<c:forEach items="${prontuarios}" var="prontuario"> 
+						<tr>
+						<td><c:out value="${prontuario.idProntuario}" /></td>
+						<td><c:out value="${prontuario.animal.nome}" /></td>
+						<td><c:out value="${prontuario.animal.proprietario.nome}" /></td>
+						<td><c:out value="${prontuario.dataRetorno}" /></td>
+						<td><c:out value="${prontuario.professorResponsavel.nome}" /></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+				</table>
+				</c:when>
+				<c:otherwise>
+					<p>Não há animais com data de retorno em 10 dias.</p>
+				</c:otherwise>
+			</c:choose>
+     
       </div>
 
       <br><br>
 
 
         <div class="push"style="height:100px;"></div>
-      </form>
+      
     </div>
 
     <div class="column4">

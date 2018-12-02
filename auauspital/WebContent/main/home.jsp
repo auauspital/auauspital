@@ -100,7 +100,7 @@
         </a>
         </div>
 
-        <a href="prontAnimal.jsp">
+        <a href="loadtelaprontuariosanimal">
           <div class="box">
 
             <div class="inner" style="background-color:#EFC589">
@@ -111,7 +111,7 @@
         </a>
         </div>
 
-        <a href="animalRetorno.jsp">
+        <a href="loadtelaatendimentodata">
           <div class="box">
 
             <div class="inner" style="background-color:#CDD7DB">

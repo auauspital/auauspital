@@ -49,4 +49,24 @@ public class ProntuarioDao extends DAO<Prontuario> {
 			return null;
 		}
 	}
+
+	public ArrayList<Prontuario> findAllByAnimal() {
+		Query q = getManager().createQuery("SELECT p FROM Prontuario p WHERE p.isAprovado = true ORDER BY p.animal ");
+		try {
+			ArrayList<Prontuario> prontuarios = (ArrayList<Prontuario>) q.getResultList();
+			return prontuarios;
+		} catch(NoResultException e) {
+			return null;
+		}
+	}
+	
+	public ArrayList<Prontuario> findAllByAnimalData() {
+		Query q = getManager().createQuery("SELECT p FROM Prontuario p WHERE p.isAprovado = true AND CURRENT_DATE - p.dataRetorno < 10 ORDER BY p.animal ");
+		try {
+			ArrayList<Prontuario> prontuarios = (ArrayList<Prontuario>) q.getResultList();
+			return prontuarios;
+		} catch(NoResultException e) {
+			return null;
+		}
+	}
 }
