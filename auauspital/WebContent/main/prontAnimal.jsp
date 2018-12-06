@@ -98,23 +98,20 @@
     <h4>Prontuários por animal</h4>
   </div>
 
+<div class="push"style="height:20px;"></div>
+ 
 
-  <div class="row">
-    <div class="column4">
+    <div class="col-sm-2"></div>
 
-  </div>
-
-
-    <div class="column3" style="margin-top:-45px;">
       
-        <div class="bordaTop"><img src="/auauspital/src/imagens/icones/veterinarian.png" alt="gatinho" width=120 height=120></div>
+    <div class="col-sm-8" style="margin-top:-45px;">
+      
 
 		<div class="bordaTop2"><h4 style=" font-size: 25px; padding-top:50px;">Busque pelo nome do animal</h4></div>
 			 <input  type="text" class="form-control" id="buscaAnimal" name="busca" placeholder="Digite o nome do animal" style="border-radius:2px;">
           <br>
 			<div style="height:50px;">
 			
-            <button type="submit" class="btn btn-form" id="btn-Teste" value="Submit" style="margin-top:0!important; float: left!important;">Buscar animal</button>
           </div >
           <div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
 			<c:choose>
@@ -128,9 +125,7 @@
 						
 					</tr>
 				</thead> <!-- fim da estrutura/cabeçalho da tabela -->
-				<tbody> <!-- Começo da parte com dados da tabela-->
-					 
-				</tbody>
+				<tbody></tbody>
 				</table>
 				</c:when>
 				<c:otherwise>
@@ -139,8 +134,9 @@
 			</c:choose>
 
 		</div>
-
-
+     </div>
+     
+     <div class="col-sm-2"></div>
      
   </div>
   <div class="footer">

@@ -36,15 +36,15 @@
   <div id="titulos">
     <h4>Animais com retorno próximo</h4>
   </div>
-
+<div class="push"style="height:20px;"></div>
 
   <div class="row">
-    <div class="column4">
+    <div class="col-sm-2">
 
   </div>
 
 
-    <div class="column3"style="margin-top:-45px;">
+    <div class="col-sm-8"style="margin-top:-45px;">
      
       <!--Divirta-se com seu query por aki, acho q vai ter q colocar um action ai no input de cima-->
       <div class="push"style="height:20px;"></div>
@@ -89,7 +89,7 @@
       
     </div>
 
-    <div class="column4">
+    <div class="col-sm-2">
 
     </div>
 

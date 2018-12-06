@@ -116,7 +116,7 @@
           <br>
 			<div style="height:50px;">
 			
-            <button type="submit" class="btn btn-form" id="btn-Teste" value="Submit" style="margin-top:0!important; float: left!important;">Buscar aluno</button>
+            
           </div >
 			<div class="table-overflow"><!--Div para colocar barra de rolagem na tabela-->
 			<c:choose>
